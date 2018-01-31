@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+       
+	<!-- DAO -->
+	<bean id="unittree-sira.sectorDAO" class="fr.paris.lutece.plugins.unittree.modules.sira.business.sector.SectorDAO" />
+	<bean id="unittree-sira.unitSiraDAO" class="fr.paris.lutece.plugins.unittree.modules.sira.business.unit.UnitSiraDAO" />
+	
+	<!-- Services -->
+	<bean id="unittree-sira.sectorService" class="fr.paris.lutece.plugins.unittree.modules.sira.service.sector.SectorService" />
+	
+	<bean id="unittree-sira.unitSiraService" class="fr.paris.lutece.plugins.unittree.modules.sira.service.unit.UnitSiraService" />
+	
+	<!-- UnitAttributes -->
+	<bean id="unittree-sira.sectorUnitAttributeComponent" class="fr.paris.lutece.plugins.unittree.modules.sira.web.sector.SectorUnitAttributeComponent" />
+	<bean id="unittree-sira.sectorUnitAttributeService" class="fr.paris.lutece.plugins.unittree.modules.sira.business.sector.SectorUnitAttribute" />
+</beans>
