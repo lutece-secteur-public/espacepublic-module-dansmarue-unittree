@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><plug-in>
     <!-- Plugin Informations -->
-    <name>unittree-sira</name>
+    <name>unittree-signalement</name>
     <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
-    <version>5.0.19-SNAPSHOT</version>
+    <version>6.0.1-SNAPSHOT</version>
     <documentation/>
     <installation/>
     <changes/>
@@ -13,7 +13,7 @@
     <icon-url>images/admin/skin/plugins/unittree/unittree.png</icon-url>
     <copyright>Copyright 2001-2011 Mairie de Paris</copyright>
 	<core-version-dependency>
-		<min-core-version>6.0.0-RC-03</min-core-version>
+		<min-core-version>6.0.1</min-core-version>
 		<max-core-version/>	
 	</core-version-dependency>
 	
