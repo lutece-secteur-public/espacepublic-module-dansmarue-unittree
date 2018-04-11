@@ -10,7 +10,7 @@
 
     <artifactId>module-unittree-signalement</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>6.0.5-SNAPSHOT</version>
+    <version>6.0.6-SNAPSHOT</version>
     <name>Lutece Unit Tree module for Signalement</name>
 
 	<distributionManagement>
