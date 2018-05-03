@@ -747,6 +747,7 @@ public class SectorDAO implements ISectorDAO
             nIndex = 1;
             idUnit = daoUtil.getInt( nIndex++ );
         }
+        daoUtil.free( );
 
         return idUnit;
 
