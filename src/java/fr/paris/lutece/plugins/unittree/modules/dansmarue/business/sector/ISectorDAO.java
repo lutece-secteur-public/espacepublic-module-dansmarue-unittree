@@ -33,10 +33,10 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector;
 
+import java.util.List;
+
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.portal.service.plugin.Plugin;
-
-import java.util.List;
 
 
 /**
@@ -284,7 +284,7 @@ public interface ISectorDAO
      *            Longitude of the location
      * @param lat
      *            Latitude of the location
-     * @param radius
+     * @param nRadius
      *            Radius within the location
      * @param nIdUnits
      *            Id of the unit directions

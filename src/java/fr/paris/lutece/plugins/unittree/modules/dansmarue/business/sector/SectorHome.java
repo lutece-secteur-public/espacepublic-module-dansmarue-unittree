@@ -33,14 +33,13 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector;
 
+import java.util.List;
+
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.plugins.unittree.service.UnitTreePlugin;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
-
-import java.util.List;
-
 
 /**
  *
@@ -50,13 +49,13 @@ import java.util.List;
 public final class SectorHome
 {
     private static final String BEAN_SECTOR_DAO = "unittree-dansmarue.sectorDAO";
-    private static Plugin _plugin = PluginService.getPlugin( UnitTreePlugin.PLUGIN_NAME );
-    private static ISectorDAO _dao = SpringContextService.getBean( BEAN_SECTOR_DAO );
+    private static Plugin       _plugin         = PluginService.getPlugin( UnitTreePlugin.PLUGIN_NAME );
+    private static ISectorDAO   _dao            = SpringContextService.getBean( BEAN_SECTOR_DAO );
 
     /**
      * Private constructor
      */
-    private SectorHome(  )
+    private SectorHome( )
     {
     }
 
@@ -77,7 +76,7 @@ public final class SectorHome
      *
      * @return the sectors
      */
-    public static List<Sector> findAll(  )
+    public static List<Sector> findAll( )
     {
         return _dao.loadAll( _plugin );
     }
@@ -111,7 +110,7 @@ public final class SectorHome
      *
      * @return a list of {@link Sector}
      */
-    public static List<Sector> findAvailableSectors(  )
+    public static List<Sector> findAvailableSectors( )
     {
         return _dao.loadAvailableSectors( _plugin );
     }
@@ -213,7 +212,7 @@ public final class SectorHome
      */
     public static void removeListSectorFromUnit( List<Sector> listSector, Unit unit )
     {
-        if ( ( listSector != null ) && ( !listSector.isEmpty(  ) ) )
+        if ( ( listSector != null ) && ( !listSector.isEmpty( ) ) )
         {
             _dao.removeListSectorFromUnit( listSector, unit, _plugin );
         }
@@ -223,6 +222,7 @@ public final class SectorHome
      * Delete the sector
      *
      * @param nIdSector
+     *            the idSector
      */
     public static void deleteSector( int nIdSector )
     {
@@ -247,6 +247,14 @@ public final class SectorHome
 
     /**
      * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's in the "select" list
+     *
+     *   @param nIdUnit
+     *            the idUnit
+     *
+     *   @param nChosenId
+     *            the chosenId
+     *
+     *   @return a list of sectors
      */
     public static List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId )
     {
@@ -278,8 +286,7 @@ public final class SectorHome
      *            Id of the unit directions
      * @return List of sectors matching those args
      */
-    public static List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer radius,
-        List<Integer> idUnits )
+    public static List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer radius, List<Integer> idUnits )
     {
         return _dao.findSectorsByDirectionsAndGeom( lng, lat, radius, idUnits );
     }

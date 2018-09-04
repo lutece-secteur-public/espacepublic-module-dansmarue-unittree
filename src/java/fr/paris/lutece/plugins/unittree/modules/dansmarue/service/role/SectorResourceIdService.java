@@ -34,14 +34,14 @@
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.service.role;
 
 
+import java.util.Locale;
+
 // Start of user code for imports
 import fr.paris.lutece.portal.service.rbac.Permission;
 import fr.paris.lutece.portal.service.rbac.ResourceIdService;
 import fr.paris.lutece.portal.service.rbac.ResourceType;
 import fr.paris.lutece.portal.service.rbac.ResourceTypeManager;
 import fr.paris.lutece.util.ReferenceList;
-
-import java.util.Locale;
 
 
 // End of user code for imports
@@ -59,7 +59,7 @@ public class SectorResourceIdService extends ResourceIdService
 
     // End of user code for specific constants
     /**
-     * Cr�� une nouvelle instance de SectorResourceIdService
+     * Constructor
      */
     public SectorResourceIdService(  )
     {
@@ -67,8 +67,9 @@ public class SectorResourceIdService extends ResourceIdService
     }
 
     /**
-     * Enregistre les ressources Lutece
+     * Resource register
      */
+    @Override
     public void register(  )
     {
         ResourceType rt = new ResourceType(  );
@@ -88,26 +89,26 @@ public class SectorResourceIdService extends ResourceIdService
     }
 
     /**
-     * Retourne une liste d'identifiants de resource ou null
      *
      * @param locale
-     *            La locale courante
-     * @return Une liste d'id de resource
+     *            the current local
+     * @return null
      */
+    @Override
     public ReferenceList getResourceIdList( Locale locale )
     {
         return null;
     }
 
     /**
-     * retourne le titre de la resource sp�cifi�e par son ID ou null
      *
      * @param strId
-     *            L'id de la resource
+     *           the  resource Id
      * @param locale
-     *            La locale courante
-     * @return Le titre de la resource sp�cifi�e
+     *           the current local
+     * @return null
      */
+    @Override
     public String getTitle( String strId, Locale locale )
     {
         return null;

@@ -48,22 +48,24 @@ public class PermissionResourceType
      * Creates a new PermissionTypeRessource.java object.
      *
      * @param strResourceType
+     *         the resourceType
      * @param strPermission
+     *         the permission
      */
     public PermissionResourceType( String strResourceType, String strPermission )
     {
         super(  );
-        this._strResourceType = strResourceType;
-        this._strPermission = strPermission;
+        _strResourceType = strResourceType;
+        _strPermission = strPermission;
     }
 
     /**
-     * @param permission
+     * @param strPermission
      *            the permission to set
      */
     public void setPermission( String strPermission )
     {
-        this._strPermission = strPermission;
+        _strPermission = strPermission;
     }
 
     /**
@@ -80,7 +82,7 @@ public class PermissionResourceType
      */
     public void setRessourceType( String strResourceType )
     {
-        this._strResourceType = strResourceType;
+        _strResourceType = strResourceType;
     }
 
     /**
