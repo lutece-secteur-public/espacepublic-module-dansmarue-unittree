@@ -58,7 +58,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  *
  * SectorJspBean
@@ -66,32 +65,32 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SectorJspBean extends PluginAdminPageJspBean
 {
-    private static final String BEAN_SECTOR_SERVICE = "unittree-sira.sectorService";
-    private static final String BEAN_UNIT_SERVICE = "unittree.unitService";
+    private static final String BEAN_SECTOR_SERVICE                    = "unittree-sira.sectorService";
+    private static final String BEAN_UNIT_SERVICE                      = "unittree.unitService";
 
     // MESSAGES
     private static final String MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET = "module.unittree.sira.message.deletesector.confirmation";
-    private static final String MESSAGE_TITLE_DELETE_TYPE_OBJET = "module.unittree.sira.messagetitle.deletesector.confirmation";
-    private static final String MESSAGE_ERROR = "module.unittree.sira.message.error.erroroccur";
-    private static final String MESSAGE_ERROR_UNIT_NOT_FOUND = "module.unittree.sira.message.error.unitNotFound";
+    private static final String MESSAGE_TITLE_DELETE_TYPE_OBJET        = "module.unittree.sira.messagetitle.deletesector.confirmation";
+    private static final String MESSAGE_ERROR                          = "module.unittree.sira.message.error.erroroccur";
+    private static final String MESSAGE_ERROR_UNIT_NOT_FOUND           = "module.unittree.sira.message.error.unitNotFound";
 
     // ANCHOR
-    private static final String ANCHOR_ASSOCIATED_SECTORS = "sira-associated-sectors";
+    private static final String ANCHOR_ASSOCIATED_SECTORS              = "sira-associated-sectors";
 
     // PARAMETERS
-    private static final String PARAMETER_ID_UNIT = "idUnit";
-    private static final String PARAMETER_ID_SECTOR = "idSector";
+    private static final String PARAMETER_ID_UNIT                      = "idUnit";
+    private static final String PARAMETER_ID_SECTOR                    = "idSector";
 
     // JSP
-    private static final String JSP_MODIFY_UNIT = "../../ModifyUnit.jsp";
-    private static final String JSP_MODIFY_SECTOR = "ModifySector.jsp";
-    private static final String JSP_DELETE_SECTOR = "jsp/admin/plugins/unittree/modules/sira/DoDeleteSectors.jsp";
-    private static final String TEMPLATE_DELETE_SECTOR = "admin/plugins/unittree/modules/sira/sector_delete.html";
+    private static final String JSP_MODIFY_UNIT                        = "../../ModifyUnit.jsp";
+    private static final String JSP_MODIFY_SECTOR                      = "ModifySector.jsp";
+    private static final String JSP_DELETE_SECTOR                      = "jsp/admin/plugins/unittree/modules/sira/DoDeleteSectors.jsp";
+    private static final String TEMPLATE_DELETE_SECTOR                 = "admin/plugins/unittree/modules/sira/sector_delete.html";
 
     // MARKER
-    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
-    private ISectorService _sectorService = SpringContextService.getBean( BEAN_SECTOR_SERVICE );
-    private IUnitService _unitService = SpringContextService.getBean( BEAN_UNIT_SERVICE );
+    private static final String MARK_LIST_AVAILABLE_SECTORS            = "listAvailableSectors";
+    private ISectorService      _sectorService                         = SpringContextService.getBean( BEAN_SECTOR_SERVICE );
+    private IUnitService        _unitService                           = SpringContextService.getBean( BEAN_UNIT_SERVICE );
 
     /**
      * Do add sectors
@@ -118,7 +117,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         }
 
         // Check permissions
-        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser( ) ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.USER_ACCESS_DENIED, AdminMessage.TYPE_STOP );
         }
@@ -126,12 +125,11 @@ public class SectorJspBean extends PluginAdminPageJspBean
         try
         {
             _sectorService.populate( unit, request );
-        }
-        catch ( UnitErrorException e )
+        } catch ( UnitErrorException e )
         {
-            AppLogService.error( e.getMessage(  ), e );
+            AppLogService.error( e.getMessage( ), e );
 
-            return AdminMessageService.getMessageUrl( request, e.getI18nErrorMessage(  ), AdminMessage.TYPE_STOP );
+            return AdminMessageService.getMessageUrl( request, e.getI18nErrorMessage( ), AdminMessage.TYPE_STOP );
         }
 
         _sectorService.addSectorsToUnit( unit );
@@ -139,7 +137,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         UrlItem url = new UrlItem( JSP_MODIFY_UNIT );
         url.addParameter( PARAMETER_ID_UNIT, nIdUnit );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
@@ -167,7 +165,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         }
 
         // Check permissions
-        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser(  ) ) )
+        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser( ) ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.USER_ACCESS_DENIED, AdminMessage.TYPE_STOP );
         }
@@ -184,7 +182,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         url.addParameter( PARAMETER_ID_UNIT, nIdUnit );
         url.setAnchor( ANCHOR_ASSOCIATED_SECTORS );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
@@ -204,18 +202,16 @@ public class SectorJspBean extends PluginAdminPageJspBean
         try
         {
             nIdSector = Integer.parseInt( strIdSector );
-        }
-        catch ( NumberFormatException e )
+        } catch ( NumberFormatException e )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_ERROR, AdminMessage.TYPE_STOP );
         }
 
-        Map<String, Object> urlParam = new HashMap<String, Object>(  );
+        Map<String, Object> urlParam = new HashMap<String, Object>( );
         urlParam.put( PARAMETER_ID_SECTOR, nIdSector );
 
-        return AdminMessageService.getMessageUrl( request, MESSAGE_TITLE_DELETE_TYPE_OBJET, null,
-            MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET, JSP_DELETE_SECTOR, "_self", AdminMessage.TYPE_CONFIRMATION,
-            urlParam, strJspBack );
+        return AdminMessageService.getMessageUrl( request, MESSAGE_TITLE_DELETE_TYPE_OBJET, null, MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET, JSP_DELETE_SECTOR, "_self", AdminMessage.TYPE_CONFIRMATION,
+                urlParam, strJspBack );
     }
 
     /**
@@ -238,7 +234,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         UrlItem url = new UrlItem( JSP_MODIFY_SECTOR );
         url.addParameter( PARAMETER_ID_UNIT, 0 );
 
-        return url.getUrl(  );
+        return url.getUrl( );
     }
 
     /**
@@ -250,7 +246,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
      */
     public String getModifySectors( HttpServletRequest request )
     {
-        Map<String, Object> model = new HashMap<String, Object>(  );
+        Map<String, Object> model = new HashMap<String, Object>( );
 
         int nIdUnit = -1;
 
@@ -261,7 +257,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
             nIdUnit = Integer.parseInt( strIdUnit );
         }
 
-        SectorUnitAttributeComponent sectorUnitAttributeComponent = new SectorUnitAttributeComponent(  );
+        SectorUnitAttributeComponent sectorUnitAttributeComponent = new SectorUnitAttributeComponent( );
 
         // Build the sector filter for search
         SectorFilter sFilter = sectorUnitAttributeComponent.buildFilter( request );
@@ -269,15 +265,15 @@ public class SectorJspBean extends PluginAdminPageJspBean
         Unit targetUnit = _unitService.getUnit( nIdUnit, false );
 
         // Check permissions
-        if ( !RBACService.isAuthorized( targetUnit, SectorResourceIdService.PERMISSION_DELETE_SECTOR, getUser(  ) ) )
+        if ( !RBACService.isAuthorized( targetUnit, SectorResourceIdService.PERMISSION_DELETE_SECTOR, getUser( ) ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.USER_ACCESS_DENIED, AdminMessage.TYPE_STOP );
         }
 
         model.put( MARK_LIST_AVAILABLE_SECTORS, _sectorService.findAvailableSectors( sFilter, nIdUnit ) );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DELETE_SECTOR, getLocale(  ), model );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DELETE_SECTOR, getLocale( ), model );
 
-        return getAdminPage( template.getHtml(  ) );
+        return getAdminPage( template.getHtml( ) );
     }
 }

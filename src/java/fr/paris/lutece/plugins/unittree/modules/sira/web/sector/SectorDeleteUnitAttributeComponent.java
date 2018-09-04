@@ -50,7 +50,6 @@ import javax.inject.Inject;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  *
  * SectorUnitAttributeComponent
@@ -58,19 +57,19 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SectorDeleteUnitAttributeComponent implements IUnitAttributeComponent
 {
-    private static final String NAME = "Sector delete";
+    private static final String NAME                         = "Sector delete";
 
     // PARAMETERS
-    private static final String PARAMETER_SEARCH_SECTORS = "searchSectors";
-    private static final String PARAMETER_ID_UNIT = "idUnit";
+    private static final String PARAMETER_SEARCH_SECTORS     = "searchSectors";
+    private static final String PARAMETER_ID_UNIT            = "idUnit";
 
     // MARKS
-    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
+    private static final String MARK_LIST_AVAILABLE_SECTORS  = "listAvailableSectors";
 
     // TEMPLATES
     private static final String TEMPLATE_ATTRIBUTE_COMPONENT = "modules/sira/sector_remove.html";
     @Inject
-    private ISectorService _sectorService;
+    private ISectorService      _sectorService;
 
     /**
      * {@inheritDoc}
@@ -97,7 +96,7 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
      * {@inheritDoc}
      */
     @Override
-    public String getName(  )
+    public String getName( )
     {
         return NAME;
     }
@@ -106,7 +105,7 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
      * {@inheritDoc}
      */
     @Override
-    public String getTemplate(  )
+    public String getTemplate( )
     {
         return TEMPLATE_ATTRIBUTE_COMPONENT;
     }
@@ -115,7 +114,7 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
      * {@inheritDoc}
      */
     @Override
-    public boolean isDisplayedInUnitForm(  )
+    public boolean isDisplayedInUnitForm( )
     {
         return false;
     }
@@ -144,21 +143,19 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
     @SuppressWarnings( "unchecked" )
     private SectorFilter buildFilter( HttpServletRequest request )
     {
-        SectorFilter sFilter = new SectorFilter(  );
+        SectorFilter sFilter = new SectorFilter( );
 
         if ( isSearch( request ) )
         {
             try
             {
-                BeanUtils.populate( sFilter, request.getParameterMap(  ) );
-            }
-            catch ( IllegalAccessException e )
+                BeanUtils.populate( sFilter, request.getParameterMap( ) );
+            } catch ( IllegalAccessException e )
             {
-                AppLogService.error( e.getMessage(  ), e );
-            }
-            catch ( InvocationTargetException e )
+                AppLogService.error( e.getMessage( ), e );
+            } catch ( InvocationTargetException e )
             {
-                AppLogService.error( e.getMessage(  ), e );
+                AppLogService.error( e.getMessage( ), e );
             }
         }
 

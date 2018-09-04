@@ -53,7 +53,6 @@ import javax.inject.Inject;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  *
  * SectorUnitAttributeComponent
@@ -61,25 +60,25 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SectorUnitAttributeComponent implements IUnitAttributeComponent
 {
-    private static final String NAME = "Sector unit attribute";
+    private static final String NAME                         = "Sector unit attribute";
 
     // PARAMETERS
-    private static final String PARAMETER_SEARCH_SECTORS = "searchSectors";
-    private static final String PARAMETER_ID_UNIT = "idUnit";
+    private static final String PARAMETER_SEARCH_SECTORS     = "searchSectors";
+    private static final String PARAMETER_ID_UNIT            = "idUnit";
 
     // MARKS
-    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
+    private static final String MARK_LIST_AVAILABLE_SECTORS  = "listAvailableSectors";
     private static final String MARK_LIST_ASSOCIATED_SECTORS = "listAssociatedSectors";
-    private static final String MARK_SECTOR_FILTER = "sectorFilter";
-    private static final String MARK_HAS_SUB_UNITS = "hasSubUnits";
-    private static final String MARK_MAP_IDS_SECTOR_UNITS = "mapIdsSectorUnits";
+    private static final String MARK_SECTOR_FILTER           = "sectorFilter";
+    private static final String MARK_HAS_SUB_UNITS           = "hasSubUnits";
+    private static final String MARK_MAP_IDS_SECTOR_UNITS    = "mapIdsSectorUnits";
 
     // TEMPLATES
     private static final String TEMPLATE_ATTRIBUTE_COMPONENT = "modules/sira/sector_unit_attribute.html";
     @Inject
-    private IUnitService _unitService;
+    private IUnitService        _unitService;
     @Inject
-    private ISectorService _sectorService;
+    private ISectorService      _sectorService;
 
     /**
      * {@inheritDoc}
@@ -118,7 +117,7 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
      * {@inheritDoc}
      */
     @Override
-    public String getName(  )
+    public String getName( )
     {
         return NAME;
     }
@@ -127,7 +126,7 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
      * {@inheritDoc}
      */
     @Override
-    public String getTemplate(  )
+    public String getTemplate( )
     {
         return TEMPLATE_ATTRIBUTE_COMPONENT;
     }
@@ -136,7 +135,7 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
      * {@inheritDoc}
      */
     @Override
-    public boolean isDisplayedInUnitForm(  )
+    public boolean isDisplayedInUnitForm( )
     {
         return false;
     }
@@ -165,21 +164,19 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
     @SuppressWarnings( "unchecked" )
     public SectorFilter buildFilter( HttpServletRequest request )
     {
-        SectorFilter sFilter = new SectorFilter(  );
+        SectorFilter sFilter = new SectorFilter( );
 
         if ( isSearch( request ) )
         {
             try
             {
-                BeanUtils.populate( sFilter, request.getParameterMap(  ) );
-            }
-            catch ( IllegalAccessException e )
+                BeanUtils.populate( sFilter, request.getParameterMap( ) );
+            } catch ( IllegalAccessException e )
             {
-                AppLogService.error( e.getMessage(  ), e );
-            }
-            catch ( InvocationTargetException e )
+                AppLogService.error( e.getMessage( ), e );
+            } catch ( InvocationTargetException e )
             {
-                AppLogService.error( e.getMessage(  ), e );
+                AppLogService.error( e.getMessage( ), e );
             }
         }
 
