@@ -33,15 +33,17 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.business.sector;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
-
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.sql.DAOUtil;
+
+import org.apache.commons.lang.StringUtils;
+
+import java.text.MessageFormat;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -51,46 +53,48 @@ import fr.paris.lutece.util.sql.DAOUtil;
 public class SectorDAO implements ISectorDAO
 {
     // SQL QUERIES
-    private static final String SQL_QUERY_SELECT                                       = " SELECT id_sector, name, number_sector FROM unittree_sector WHERE id_sector = ? ORDER BY name ASC ";
-    private static final String SQL_QUERY_SELECT_BY_ID_UNIT                            = " SELECT s.id_sector, s.name, s.number_sector "
-            + " FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector " + " WHERE u.id_unit = ? ORDER BY s.id_sector ";
-    private static final String SQL_QUERY_SELECT_ALL                                   = " SELECT id_sector, name, number_sector FROM unittree_sector ";
-    private static final String SQL_QUERY_ADD_SECTOR_TO_UNIT                           = " INSERT INTO unittree_unit_sector ( id_unit, id_sector ) VALUES ( ?, ? ) ";
-    private static final String SQL_QUERY_HAS_SECTOR                                   = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
-    private static final String SQL_QUERY_HAS_SECTORS                                  = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? ";
-    private static final String SQL_QUERY_IS_ASSOCIATED                                = " SELECT id_sector FROM unittree_unit_sector WHERE id_sector = ? ";
-    private static final String SQL_QUERY_REMOVE_SECTORS_FROM_UNIT                     = " DELETE FROM unittree_unit_sector WHERE id_unit = ? ";
-    private static final String SQL_QUERY_REMOVE                                       = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
-    private static final String SQL_QUERY_SELECT_UNITS_WITH_NO_CHILDREN_BY_ID_SECTOR   = " SELECT uu.id_unit, uu.id_parent, uu.label, uu.description " + " FROM unittree_unit AS uu "
-            + " INNER JOIN unittree_unit_sector AS us ON uu.id_unit = us.id_unit " + " WHERE uu.id_unit NOT IN(SELECT id_parent FROM unittree_unit) AND us.id_sector = ? ";
-    private static final String SQL_QUERY_SELECT_AVAILABLE_SECTORS                     = " SELECT s.id_sector, s.name, s.number_sector FROM unittree_sector AS s "
-            + " WHERE s.id_sector NOT IN ( SELECT us.id_sector FROM unittree_unit_sector AS us ) ";
-    private static final String SQL_WHERE                                              = " WHERE ";
-    private static final String SQL_NOT                                                = " NOT ";
-    private static final String SQL_IN                                                 = " IN ";
-    private static final String SQL_AND                                                = " AND ";
-    private static final String SQL_LIKE                                               = " LIKE ";
-    private static final String SQL_UPPER                                              = " UPPER ";
-    private static final String SQL_FILTER_NAME                                        = " name ";
-    private static final String SQL_FILTER_NUMBER_SECTOR                               = " number_sector ";
-    private static final String SQL_FILTER_ID_SECTOR                                   = " id_sector ";
-    private static final String SQL_ORDER_BY_NAME_ASC                                  = " ORDER BY name ASC ";
-    private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID          = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = ? ) AND unit.id_unit = ? ORDER BY s.id_sector ";
+    private static final String SQL_QUERY_SELECT = " SELECT id_sector, name, number_sector FROM unittree_sector WHERE id_sector = ? ORDER BY name ASC ";
+    private static final String SQL_QUERY_SELECT_BY_ID_UNIT = " SELECT s.id_sector, s.name, s.number_sector " +
+        " FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector " +
+        " WHERE u.id_unit = ? ORDER BY s.id_sector ";
+    private static final String SQL_QUERY_SELECT_ALL = " SELECT id_sector, name, number_sector FROM unittree_sector ";
+    private static final String SQL_QUERY_ADD_SECTOR_TO_UNIT = " INSERT INTO unittree_unit_sector ( id_unit, id_sector ) VALUES ( ?, ? ) ";
+    private static final String SQL_QUERY_HAS_SECTOR = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
+    private static final String SQL_QUERY_HAS_SECTORS = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? ";
+    private static final String SQL_QUERY_IS_ASSOCIATED = " SELECT id_sector FROM unittree_unit_sector WHERE id_sector = ? ";
+    private static final String SQL_QUERY_REMOVE_SECTORS_FROM_UNIT = " DELETE FROM unittree_unit_sector WHERE id_unit = ? ";
+    private static final String SQL_QUERY_REMOVE = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
+    private static final String SQL_QUERY_SELECT_UNITS_WITH_NO_CHILDREN_BY_ID_SECTOR = " SELECT uu.id_unit, uu.id_parent, uu.label, uu.description " +
+        " FROM unittree_unit AS uu " + " INNER JOIN unittree_unit_sector AS us ON uu.id_unit = us.id_unit " +
+        " WHERE uu.id_unit NOT IN(SELECT id_parent FROM unittree_unit) AND us.id_sector = ? ";
+    private static final String SQL_QUERY_SELECT_AVAILABLE_SECTORS = " SELECT s.id_sector, s.name, s.number_sector FROM unittree_sector AS s " +
+        " WHERE s.id_sector NOT IN ( SELECT us.id_sector FROM unittree_unit_sector AS us ) ";
+    private static final String SQL_WHERE = " WHERE ";
+    private static final String SQL_NOT = " NOT ";
+    private static final String SQL_IN = " IN ";
+    private static final String SQL_AND = " AND ";
+    private static final String SQL_LIKE = " LIKE ";
+    private static final String SQL_UPPER = " UPPER ";
+    private static final String SQL_FILTER_NAME = " name ";
+    private static final String SQL_FILTER_NUMBER_SECTOR = " number_sector ";
+    private static final String SQL_FILTER_ID_SECTOR = " id_sector ";
+    private static final String SQL_ORDER_BY_NAME_ASC = " ORDER BY name ASC ";
+    private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = ? ) AND unit.id_unit = ? ORDER BY s.id_sector ";
     private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_SPECIFIC_DEVE_UNIT = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = 260 OR unit_sector.id_unit = 85 ) AND unit.id_unit = ? ORDER BY s.id_sector ";
-    private static final String SQL_QUERY_DELETE_SECTOR                                = "DELETE FROM unittree_sector WHERE id_sector = ? ";
-    private static final String SQL_QUERY_DELETE_LIST_SECTORS_FROM_LIST_UNITS          = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector IN ( ";
-    private static final String SQL_QUERY_SELECT_SECTOR_BY_DIRECTION_AND_GEOM          = "SELECT DISTINCT us.id_sector, us.name, us.number_sector" + " FROM unittree_unit_sector uus"
-            + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector" + " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true"
-            + " AND uus.id_unit IN ({0})";
-
-    private static final String SQL_QUERY_SELECT_DIRECTION_ID_BY_SECTOR_ID             = "SELECT unit.id_unit FROM unittree_unit_sector uus INNER JOIN unittree_unit unit ON unit.id_unit = uus.id_unit WHERE id_sector = ? AND unit.id_parent = 0";
+    private static final String SQL_QUERY_DELETE_SECTOR = "DELETE FROM unittree_sector WHERE id_sector = ? ";
+    private static final String SQL_QUERY_DELETE_LIST_SECTORS_FROM_LIST_UNITS = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector IN ( ";
+    private static final String SQL_QUERY_SELECT_SECTOR_BY_DIRECTION_AND_GEOM = "SELECT DISTINCT us.id_sector, us.name, us.number_sector" +
+        " FROM unittree_unit_sector uus" + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector" +
+        " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true" +
+        " AND uus.id_unit IN ({0})";
+    private static final String SQL_QUERY_SELECT_DIRECTION_ID_BY_SECTOR_ID = "SELECT unit.id_unit FROM unittree_unit_sector uus INNER JOIN unittree_unit unit ON unit.id_unit = uus.id_unit WHERE id_sector = ? AND unit.id_parent = 0";
 
     // CONSTANTS
-    private static final String OPEN_BRACKET                                           = " ( ";
-    private static final String CLOSED_BRACKET                                         = " ) ";
-    private static final String QUESTION_MARK                                          = " ? ";
-    private static final String COMMA                                                  = " , ";
-    private static final String PERCENT                                                = "%";
+    private static final String OPEN_BRACKET = " ( ";
+    private static final String CLOSED_BRACKET = " ) ";
+    private static final String QUESTION_MARK = " ? ";
+    private static final String COMMA = " , ";
+    private static final String PERCENT = "%";
 
     /**
      * {@inheritDoc}
@@ -102,19 +106,19 @@ public class SectorDAO implements ISectorDAO
 
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
         daoUtil.setInt( 1, nIdSector );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            sector = new Sector( );
+            sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return sector;
     }
@@ -125,16 +129,16 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Sector> loadAll( Plugin plugin )
     {
-        List<Sector> listSectors = new ArrayList<Sector>( );
+        List<Sector> listSectors = new ArrayList<Sector>(  );
 
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_ALL + SQL_ORDER_BY_NAME_ASC, plugin );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next( ) )
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            Sector sector = new Sector( );
+            Sector sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
@@ -142,7 +146,7 @@ public class SectorDAO implements ISectorDAO
             listSectors.add( sector );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listSectors;
     }
@@ -153,23 +157,23 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Sector> loadByIdUnit( int nIdUnit, Plugin plugin )
     {
-        List<Sector> listSectors = new ArrayList<Sector>( );
+        List<Sector> listSectors = new ArrayList<Sector>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_ID_UNIT, plugin );
         daoUtil.setInt( 1, nIdUnit );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next( ) )
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            Sector sector = new Sector( );
+            Sector sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
             listSectors.add( sector );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listSectors;
     }
@@ -180,24 +184,24 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId, Plugin plugin )
     {
-        List<Sector> listSectors = new ArrayList<Sector>( );
+        List<Sector> listSectors = new ArrayList<Sector>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID );
         daoUtil.setInt( 1, nChosenId );
         daoUtil.setInt( 2, nIdUnit );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next( ) )
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            Sector sector = new Sector( );
+            Sector sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
             listSectors.add( sector );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listSectors;
     }
@@ -209,23 +213,23 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Sector> loadByIdUnitWithoutSpecificDeveUnit( int nIdUnit, Plugin plugin )
     {
-        List<Sector> listSectors = new ArrayList<Sector>( );
+        List<Sector> listSectors = new ArrayList<Sector>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_SPECIFIC_DEVE_UNIT );
         daoUtil.setInt( 1, nIdUnit );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next( ) )
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            Sector sector = new Sector( );
+            Sector sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
             listSectors.add( sector );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listSectors;
     }
@@ -236,23 +240,23 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Sector> loadByFilter( SectorFilter sFilter, Plugin plugin )
     {
-        List<Sector> listSectors = new ArrayList<Sector>( );
+        List<Sector> listSectors = new ArrayList<Sector>(  );
         DAOUtil daoUtil = new DAOUtil( buildSQLQuery( sFilter ), plugin );
         setFilterValue( sFilter, daoUtil );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next( ) )
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            Sector sector = new Sector( );
+            Sector sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
             listSectors.add( sector );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listSectors;
     }
@@ -263,22 +267,22 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Sector> loadAvailableSectors( Plugin plugin )
     {
-        List<Sector> listSectors = new ArrayList<Sector>( );
+        List<Sector> listSectors = new ArrayList<Sector>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_AVAILABLE_SECTORS, plugin );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next( ) )
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            Sector sector = new Sector( );
+            Sector sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
             listSectors.add( sector );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listSectors;
     }
@@ -289,15 +293,15 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Unit> loadUnitsWithNoChildrenByIdSector( int nIdSector, Plugin plugin )
     {
-        List<Unit> listUnits = new ArrayList<Unit>( );
+        List<Unit> listUnits = new ArrayList<Unit>(  );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_UNITS_WITH_NO_CHILDREN_BY_ID_SECTOR, plugin );
         daoUtil.setInt( 1, nIdSector );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        while ( daoUtil.next( ) )
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
-            Unit unit = new Unit( );
+            Unit unit = new Unit(  );
             unit.setIdUnit( daoUtil.getInt( nIndex++ ) );
             unit.setIdParent( daoUtil.getInt( nIndex++ ) );
             unit.setLabel( daoUtil.getString( nIndex++ ) );
@@ -305,7 +309,7 @@ public class SectorDAO implements ISectorDAO
             listUnits.add( unit );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listUnits;
     }
@@ -322,8 +326,8 @@ public class SectorDAO implements ISectorDAO
         daoUtil.setInt( nIndex++, nIdUnit );
         daoUtil.setInt( nIndex, nIdSector );
 
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     /**
@@ -337,14 +341,14 @@ public class SectorDAO implements ISectorDAO
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_HAS_SECTOR, plugin );
         daoUtil.setInt( nIndex++, nIdUnit );
         daoUtil.setInt( nIndex, nIdSector );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             bHasSector = true;
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return bHasSector;
     }
@@ -358,14 +362,14 @@ public class SectorDAO implements ISectorDAO
         boolean bIsAssociated = false;
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_IS_ASSOCIATED, plugin );
         daoUtil.setInt( 1, nIdSector );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             bIsAssociated = true;
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return bIsAssociated;
     }
@@ -380,14 +384,14 @@ public class SectorDAO implements ISectorDAO
         int nIndex = 1;
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_HAS_SECTORS, plugin );
         daoUtil.setInt( nIndex, nIdUnit );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             bHasSector = true;
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return bHasSector;
     }
@@ -400,8 +404,8 @@ public class SectorDAO implements ISectorDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_REMOVE_SECTORS_FROM_UNIT, plugin );
         daoUtil.setInt( 1, nIdUnit );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     /**
@@ -414,8 +418,8 @@ public class SectorDAO implements ISectorDAO
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_REMOVE, plugin );
         daoUtil.setInt( nIndex++, nIdUnit );
         daoUtil.setInt( nIndex, nIdSector );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     @Override
@@ -423,37 +427,35 @@ public class SectorDAO implements ISectorDAO
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE_SECTOR, plugin );
         daoUtil.setInt( 1, nIdSector );
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Sector getSectorByGeomAndUnit( double lng, double lat, int idUnit, Plugin plugin )
+    public Sector getSectorByGeomAndUnit( double lLng, double lLat, int nIdUnit, Plugin plugin )
     {
-        String sql = "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector INNER JOIN unittree_unit ON unittree_unit.id_unit = unittree_unit_sector.id_unit WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT("
-                + lng + " " + lat + ")', 4326)) AND unittree_unit.id_unit = ?";
+        String sql = "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector INNER JOIN unittree_unit ON unittree_unit.id_unit = unittree_unit_sector.id_unit WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT(" +
+            lLng + " " + lLat + ")', 4326)) AND unittree_unit.id_unit = ?";
         DAOUtil daoUtil = new DAOUtil( sql, plugin );
-        // daoUtil.setDouble( 1, lng );
-        // daoUtil.setDouble( 2, lat );
-        daoUtil.setInt( 1, idUnit );
-        daoUtil.executeQuery( );
+        daoUtil.setInt( 1, nIdUnit );
+        daoUtil.executeQuery(  );
 
         Sector sector = null;
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            sector = new Sector( );
+            sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return sector;
     }
@@ -464,27 +466,25 @@ public class SectorDAO implements ISectorDAO
     @Override
     public Sector getSectorByGeomAndTypeSignalement( Double lng, Double lat, Integer idTypeSignalement )
     {
-        DAOUtil daoUtil = new DAOUtil(
-                "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector INNER JOIN unittree_unit ON unittree_unit.id_unit = unittree_unit_sector.id_unit INNER JOIN signalement_type_signalement on signalement_type_signalement.fk_id_unit = unittree_unit.id_unit WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT("
-                        + lng + " " + lat + ")', 4326)) AND signalement_type_signalement.id_type_signalement = ?" );
-        // daoUtil.setDouble( 1, lng );
-        // daoUtil.setDouble( 2, lat );
+        DAOUtil daoUtil = new DAOUtil( 
+                "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector INNER JOIN unittree_unit ON unittree_unit.id_unit = unittree_unit_sector.id_unit INNER JOIN signalement_type_signalement on signalement_type_signalement.fk_id_unit = unittree_unit.id_unit WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT(" +
+                lng + " " + lat + ")', 4326)) AND signalement_type_signalement.id_type_signalement = ?" );
         daoUtil.setInt( 1, idTypeSignalement );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
         Sector sector = null;
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            sector = new Sector( );
+            sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return sector;
     }
@@ -495,25 +495,25 @@ public class SectorDAO implements ISectorDAO
     @Override
     public Sector getSectorByGeomAndTypeEquipement( Double lng, Double lat, Integer idTypeEquipement )
     {
-        DAOUtil daoUtil = new DAOUtil(
-                "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector INNER JOIN unittree_unit ON unittree_unit.id_unit = unittree_unit_sector.id_unit INNER JOIN equipement_type_equipement on equipement_type_equipement.fk_id_unit = unittree_unit.id_unit WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT("
-                        + lng + " " + lat + ")', 4326)) AND equipement_type_equipement.id_type_equipement = ?" );
+        DAOUtil daoUtil = new DAOUtil( 
+                "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector INNER JOIN unittree_unit ON unittree_unit.id_unit = unittree_unit_sector.id_unit INNER JOIN equipement_type_equipement on equipement_type_equipement.fk_id_unit = unittree_unit.id_unit WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT(" +
+                lng + " " + lat + ")', 4326)) AND equipement_type_equipement.id_type_equipement = ?" );
         daoUtil.setInt( 1, idTypeEquipement );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
         Sector sector = null;
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            sector = new Sector( );
+            sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return sector;
     }
@@ -526,7 +526,7 @@ public class SectorDAO implements ISectorDAO
     {
         StringBuilder sbSql = new StringBuilder( SQL_QUERY_DELETE_LIST_SECTORS_FROM_LIST_UNITS );
 
-        for ( int nIndexList = 0; nIndexList < ( listSector.size( ) - 1 ); nIndexList++ )
+        for ( int nIndexList = 0; nIndexList < ( listSector.size(  ) - 1 ); nIndexList++ )
         {
             sbSql.append( QUESTION_MARK );
             sbSql.append( COMMA );
@@ -534,15 +534,18 @@ public class SectorDAO implements ISectorDAO
 
         sbSql.append( QUESTION_MARK );
         sbSql.append( CLOSED_BRACKET );
-        DAOUtil daoUtil = new DAOUtil( sbSql.toString( ), plugin );
+
+        DAOUtil daoUtil = new DAOUtil( sbSql.toString(  ), plugin );
         int nIndex = 1;
-        daoUtil.setInt( nIndex, unit.getIdUnit( ) );
+        daoUtil.setInt( nIndex, unit.getIdUnit(  ) );
+
         for ( Sector sector : listSector )
         {
-            daoUtil.setInt( ++nIndex, sector.getIdSector( ) );
+            daoUtil.setInt( ++nIndex, sector.getIdSector(  ) );
         }
-        daoUtil.executeUpdate( );
-        daoUtil.free( );
+
+        daoUtil.executeUpdate(  );
+        daoUtil.free(  );
     }
 
     /**
@@ -551,25 +554,27 @@ public class SectorDAO implements ISectorDAO
     @Override
     public Sector getSectorByGeomAndIdUnitParent( Double lng, Double lat, Integer idUnitParent )
     {
-        DAOUtil daoUtil = new DAOUtil( "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector "
-                + " INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector " + " WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT(" + lng + " "
-                + lat + ")', 4326)) AND unittree_unit_sector.id_unit = ?" );
+        DAOUtil daoUtil = new DAOUtil( 
+                "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector " +
+                " INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector " +
+                " WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT(" + lng + " " + lat +
+                ")', 4326)) AND unittree_unit_sector.id_unit = ?" );
         daoUtil.setInt( 1, idUnitParent );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
         Sector sector = null;
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            sector = new Sector( );
+            sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return sector;
     }
@@ -586,19 +591,19 @@ public class SectorDAO implements ISectorDAO
         StringBuilder sbSQL = new StringBuilder( SQL_QUERY_SELECT_ALL );
         int nIndex = 1;
 
-        if ( sFilter.containsListIdsSector( ) )
+        if ( sFilter.containsListIdsSector(  ) )
         {
             nIndex = addSQLWhereOr( sbSQL, nIndex );
             sbSQL.append( SQL_FILTER_ID_SECTOR );
 
-            if ( sFilter.isExcludeIdsSector( ) )
+            if ( sFilter.isExcludeIdsSector(  ) )
             {
                 sbSQL.append( SQL_NOT );
             }
 
             sbSQL.append( SQL_IN ).append( OPEN_BRACKET );
 
-            for ( int nIndexList = 0; nIndexList < ( sFilter.getListIdsSector( ).size( ) - 1 ); nIndexList++ )
+            for ( int nIndexList = 0; nIndexList < ( sFilter.getListIdsSector(  ).size(  ) - 1 ); nIndexList++ )
             {
                 sbSQL.append( QUESTION_MARK );
                 sbSQL.append( COMMA );
@@ -607,7 +612,7 @@ public class SectorDAO implements ISectorDAO
             sbSQL.append( QUESTION_MARK ).append( CLOSED_BRACKET );
         }
 
-        if ( sFilter.containsSectorName( ) )
+        if ( sFilter.containsSectorName(  ) )
         {
             nIndex = addSQLWhereOr( sbSQL, nIndex );
             sbSQL.append( SQL_UPPER ).append( OPEN_BRACKET ).append( SQL_FILTER_NAME ).append( CLOSED_BRACKET );
@@ -615,7 +620,7 @@ public class SectorDAO implements ISectorDAO
             sbSQL.append( SQL_UPPER ).append( OPEN_BRACKET ).append( QUESTION_MARK ).append( CLOSED_BRACKET );
         }
 
-        if ( sFilter.containsSectorNum( ) )
+        if ( sFilter.containsSectorNum(  ) )
         {
             nIndex = addSQLWhereOr( sbSQL, nIndex );
             sbSQL.append( SQL_UPPER ).append( OPEN_BRACKET ).append( SQL_FILTER_NUMBER_SECTOR ).append( CLOSED_BRACKET );
@@ -625,7 +630,7 @@ public class SectorDAO implements ISectorDAO
 
         sbSQL.append( SQL_ORDER_BY_NAME_ASC );
 
-        return sbSQL.toString( );
+        return sbSQL.toString(  );
     }
 
     /**
@@ -640,22 +645,22 @@ public class SectorDAO implements ISectorDAO
     {
         int nIndex = 1;
 
-        if ( sFilter.containsListIdsSector( ) )
+        if ( sFilter.containsListIdsSector(  ) )
         {
-            for ( int nIdSector : sFilter.getListIdsSector( ) )
+            for ( int nIdSector : sFilter.getListIdsSector(  ) )
             {
                 daoUtil.setInt( nIndex++, nIdSector );
             }
         }
 
-        if ( sFilter.containsSectorName( ) )
+        if ( sFilter.containsSectorName(  ) )
         {
-            daoUtil.setString( nIndex++, PERCENT + sFilter.getSectorName( ) + PERCENT );
+            daoUtil.setString( nIndex++, PERCENT + sFilter.getSectorName(  ) + PERCENT );
         }
 
-        if ( sFilter.containsSectorNum( ) )
+        if ( sFilter.containsSectorNum(  ) )
         {
-            daoUtil.setString( nIndex, PERCENT + sFilter.getSectorNum( ) + PERCENT );
+            daoUtil.setString( nIndex, PERCENT + sFilter.getSectorNum(  ) + PERCENT );
         }
     }
 
@@ -677,7 +682,8 @@ public class SectorDAO implements ISectorDAO
         if ( nIndex == 1 )
         {
             sbSQL.append( SQL_WHERE );
-        } else
+        }
+        else
         {
             sbSQL.append( SQL_AND );
         }
@@ -691,12 +697,14 @@ public class SectorDAO implements ISectorDAO
     @Override
     public List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer radius, List<Integer> idUnits )
     {
-        int listeLength = idUnits.size( );
+        int listeLength = idUnits.size(  );
         Character[] array = new Character[listeLength];
+
         for ( int i = 0; i < listeLength; i++ )
         {
             array[i] = '?';
         }
+
         String unionQuery = StringUtils.join( array, COMMA );
 
         String sqlQuery = MessageFormat.format( SQL_QUERY_SELECT_SECTOR_BY_DIRECTION_AND_GEOM, unionQuery );
@@ -711,22 +719,24 @@ public class SectorDAO implements ISectorDAO
             daoUtil.setInt( nIndex++, idUnit );
         }
 
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        List<Sector> sectorList = new ArrayList<Sector>( );
-        while ( daoUtil.next( ) )
+        List<Sector> sectorList = new ArrayList<Sector>(  );
+
+        while ( daoUtil.next(  ) )
         {
             nIndex = 1;
-            Sector sector = new Sector( );
+
+            Sector sector = new Sector(  );
             sector.setIdSector( daoUtil.getInt( nIndex++ ) );
             sector.setName( daoUtil.getString( nIndex++ ) );
             sector.setNumberSector( daoUtil.getString( nIndex++ ) );
             sectorList.add( sector );
         }
-        daoUtil.free( );
+
+        daoUtil.free(  );
 
         return sectorList;
-
     }
 
     /**
@@ -738,18 +748,18 @@ public class SectorDAO implements ISectorDAO
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_DIRECTION_ID_BY_SECTOR_ID );
         int nIndex = 1;
         daoUtil.setInt( nIndex++, idSector );
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
         int idUnit = -1;
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             nIndex = 1;
             idUnit = daoUtil.getInt( nIndex++ );
         }
-        daoUtil.free( );
+
+        daoUtil.free(  );
 
         return idUnit;
-
     }
 }

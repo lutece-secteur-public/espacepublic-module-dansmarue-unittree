@@ -33,9 +33,9 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.business.sector;
 
-import java.util.List;
-
 import fr.paris.lutece.plugins.unittree.business.unit.AbstractUnitAttribute;
+
+import java.util.List;
 
 
 /**
@@ -67,7 +67,9 @@ public class SectorUnitAttribute extends AbstractUnitAttribute<List<Integer>>
 
     /**
      * Check if the unit has the given id sector
-     * @param nIdSector the id sector
+     *
+     * @param nIdSector
+     *            the id sector
      * @return true if the unit has the sector, false otherwise
      */
     public boolean hasIdSector( int nIdSector )

@@ -35,12 +35,13 @@ package fr.paris.lutece.plugins.unittree.modules.sira.business.sector;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+
 /**
  *
  * Sector
  *
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class Sector
 {
     private int _nIdSector;
@@ -49,6 +50,7 @@ public class Sector
 
     /**
      * Get the id sector
+     *
      * @return the id sector
      */
     public int getIdSector(  )
@@ -58,7 +60,9 @@ public class Sector
 
     /**
      * Set the id sector
-     * @param nIdSector the id sector
+     *
+     * @param nIdSector
+     *            the id sector
      */
     public void setIdSector( int nIdSector )
     {
@@ -67,6 +71,7 @@ public class Sector
 
     /**
      * Get the name
+     *
      * @return the name
      */
     public String getName(  )
@@ -76,7 +81,9 @@ public class Sector
 
     /**
      * Set the name
-     * @param strName the name
+     *
+     * @param strName
+     *            the name
      */
     public void setName( String strName )
     {
@@ -85,6 +92,7 @@ public class Sector
 
     /**
      * Get the number sector
+     *
      * @return the number sector
      */
     public String getNumberSector(  )
@@ -94,7 +102,9 @@ public class Sector
 
     /**
      * Set the number sector
-     * @param strNumberSector the number sector
+     *
+     * @param strNumberSector
+     *            the number sector
      */
     public void setNumberSector( String strNumberSector )
     {
@@ -103,6 +113,7 @@ public class Sector
 
     /**
      * To string representation
+     *
      * @return formatted string
      */
     public String getFormatNameNumber(  )
@@ -112,6 +123,7 @@ public class Sector
 
     /**
      * To string representation (invert of {@link #getFormatNameNumber()}
+     *
      * @return formatted string
      */
     public String getFormatNumberName(  )

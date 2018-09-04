@@ -33,63 +33,61 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.service.impl;
 
+
 /**
- * Conteneur de permission / type de ressource.
- * 
- * @author aBataille
+ *
+ * PermissionResourceType
+ *
  */
-public class PermissionRessourceType
+public class PermissionResourceType
 {
-    /**
-     * Cl� de la permission
-     */
-    private String permission;
-    /**
-     * Cl� du type de ressource (use case).
-     */
-    private String ressourceType;
+    private String _strPermission;
+    private String _strResourceType;
 
     /**
      * Creates a new PermissionTypeRessource.java object.
-     * @param ressourceType
-     * @param permission
+     *
+     * @param strResourceType
+     * @param strPermission
      */
-    public PermissionRessourceType( String ressourceType, String permission )
+    public PermissionResourceType( String strResourceType, String strPermission )
     {
-        super( );
-        this.ressourceType = ressourceType;
-        this.permission = permission;
+        super(  );
+        this._strResourceType = strResourceType;
+        this._strPermission = strPermission;
     }
 
     /**
-     * @param permission the permission to set
+     * @param permission
+     *            the permission to set
      */
-    public void setPermission( String permission )
+    public void setPermission( String strPermission )
     {
-        this.permission = permission;
+        this._strPermission = strPermission;
     }
 
     /**
      * @return the permission
      */
-    public String getPermission( )
+    public String getPermission(  )
     {
-        return permission;
+        return _strPermission;
     }
 
     /**
-     * @param ressourceType the ressourceType to set
+     * @param strResourceType
+     *            the resourceType to set
      */
-    public void setRessourceType( String ressourceType )
+    public void setRessourceType( String strResourceType )
     {
-        this.ressourceType = ressourceType;
+        this._strResourceType = strResourceType;
     }
 
     /**
      * @return the ressourceType
      */
-    public String getRessourceType( )
+    public String getRessourceType(  )
     {
-        return ressourceType;
+        return _strResourceType;
     }
 }

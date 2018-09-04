@@ -33,20 +33,22 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.web.sector;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
-
 import fr.paris.lutece.plugins.unittree.modules.sira.business.sector.SectorFilter;
 import fr.paris.lutece.plugins.unittree.modules.sira.service.sector.ISectorService;
 import fr.paris.lutece.plugins.unittree.web.unit.IUnitAttributeComponent;
 import fr.paris.lutece.portal.business.user.AdminUser;
 import fr.paris.lutece.portal.service.util.AppLogService;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
+
+import java.lang.reflect.InvocationTargetException;
+
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -67,7 +69,6 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
 
     // TEMPLATES
     private static final String TEMPLATE_ATTRIBUTE_COMPONENT = "modules/sira/sector_remove.html";
-
     @Inject
     private ISectorService _sectorService;
 
@@ -90,7 +91,6 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
         SectorFilter sFilter = buildFilter( request );
 
         model.put( MARK_LIST_AVAILABLE_SECTORS, _sectorService.findAvailableSectors( sFilter, nIdUnit ) );
-
     }
 
     /**
@@ -124,7 +124,9 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
 
     /**
      * Check if user has clicked on the button to search sectors
-     * @param request the HTTP request
+     *
+     * @param request
+     *            the HTTP request
      * @return true if it is a search action, false otherwise
      */
     private boolean isSearch( HttpServletRequest request )
@@ -134,9 +136,12 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
 
     /**
      * Build the filter
-     * @param request the HTTP request
+     *
+     * @param request
+     *            the HTTP request
      * @return a {@link SectorFilter}
      */
+    @SuppressWarnings( "unchecked" )
     private SectorFilter buildFilter( HttpServletRequest request )
     {
         SectorFilter sFilter = new SectorFilter(  );

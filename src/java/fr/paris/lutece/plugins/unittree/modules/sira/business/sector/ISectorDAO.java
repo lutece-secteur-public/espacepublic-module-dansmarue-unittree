@@ -33,18 +33,15 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.business.sector;
 
-import java.util.List;
-
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.portal.service.plugin.Plugin;
+
+import java.util.List;
+
 
 /**
  *
  * ISectorDAO
- *
- */
-/**
- * @author vbroussard
  *
  */
 public interface ISectorDAO
@@ -236,11 +233,11 @@ public interface ISectorDAO
      *            the lng
      * @param lat
      *            the lat
-     * @param idTypeSignalement
+     * @param nIdTypeSignalement
      *            the id type signalement
      * @return the sector by geom and type signalement
      */
-    Sector getSectorByGeomAndTypeSignalement( Double lng, Double lat, Integer idTypeSignalement );
+    Sector getSectorByGeomAndTypeSignalement( Double lng, Double lat, Integer nIdTypeSignalement );
 
     /**
      * Gets the sector by geom and type equipement.
@@ -249,11 +246,11 @@ public interface ISectorDAO
      *            the lng
      * @param lat
      *            the lat
-     * @param idTypeSignalement
-     *            the id type signalement
+     * @param nIdTypeEquipement
+     *            the id type equipement
      * @return the sector by geom and type equipement
      */
-    Sector getSectorByGeomAndTypeEquipement( Double lng, Double lat, Integer idTypeEquipement );
+    Sector getSectorByGeomAndTypeEquipement( Double lng, Double lat, Integer nIdTypeEquipement );
 
     /**
      * Gets the sector by geom and type signalement.
@@ -262,11 +259,11 @@ public interface ISectorDAO
      *            the lng
      * @param lat
      *            the lat
-     * @param idUnitParent
+     * @param nIdUnitParent
      *            the unit id of the parent
      * @return the sector by geom and type signalement
      */
-    public Sector getSectorByGeomAndIdUnitParent( Double lng, Double lat, Integer idUnitParent );
+    public Sector getSectorByGeomAndIdUnitParent( Double lng, Double lat, Integer nIdUnitParent );
 
     /**
      * Remove a list of sectors from a list of units
@@ -289,18 +286,18 @@ public interface ISectorDAO
      *            Latitude of the location
      * @param radius
      *            Radius within the location
-     * @param idUnits
+     * @param nIdUnits
      *            Id of the unit directions
      * @return List of sectors matching those args
      */
-    List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer radius, List<Integer> idUnits );
+    List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer nRadius, List<Integer> nIdUnits );
 
     /**
      * Finds a direction from a sector id
      *
-     * @param idSector
+     * @param nIdSector
      *            the sector id linked to the direction unit
      * @return the id of the direction unit
      */
-    int getDirectionUnitIdBySectorId( int idSector );
+    int getDirectionUnitIdBySectorId( int nIdSector );
 }

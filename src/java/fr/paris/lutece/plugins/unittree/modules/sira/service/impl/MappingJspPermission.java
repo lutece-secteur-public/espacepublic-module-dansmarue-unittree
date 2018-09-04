@@ -33,32 +33,34 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.service.impl;
 
+import fr.paris.lutece.plugins.unittree.modules.sira.service.role.SectorResourceIdService;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.paris.lutece.plugins.unittree.modules.sira.service.role.SectorResourceIdService;
-
 
 /**
- * Classe permettant de faire le mapping entre les jsp et leur permission
- * associ�e.
- * 
+ * Classe permettant de faire le mapping entre les jsp et leur permission associ�e.
+ *
  */
 public class MappingJspPermission
 {
+    public static final Map<String, PermissionResourceType> MAPPING_JSP_PERMISSIONS;
 
-    public static final Map<String, PermissionRessourceType> MAPPING_JSP_PERMISSIONS;
     static
     {
-        MAPPING_JSP_PERMISSIONS = new HashMap<String, PermissionRessourceType>( );
+        MAPPING_JSP_PERMISSIONS = new HashMap<String, PermissionResourceType>(  );
 
-        MAPPING_JSP_PERMISSIONS.put( "ModifySector.jsp", new PermissionRessourceType(
-                SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_SUPPRIMER_SECTEUR ) );
+        MAPPING_JSP_PERMISSIONS.put( "ModifySector.jsp",
+            new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE,
+                SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
 
-        MAPPING_JSP_PERMISSIONS.put( "DoDeleteSectors.jsp", new PermissionRessourceType(
-                SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_SUPPRIMER_SECTEUR ) );
+        MAPPING_JSP_PERMISSIONS.put( "DoDeleteSectors.jsp",
+            new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE,
+                SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
 
-        MAPPING_JSP_PERMISSIONS.put( "DeleteSectors.jsp", new PermissionRessourceType(
-                SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_SUPPRIMER_SECTEUR ) );
+        MAPPING_JSP_PERMISSIONS.put( "DeleteSectors.jsp",
+            new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE,
+                SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
     }
 }

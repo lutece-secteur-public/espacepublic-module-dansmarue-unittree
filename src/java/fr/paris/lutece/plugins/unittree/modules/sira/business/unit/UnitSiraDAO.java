@@ -1,55 +1,103 @@
+/*
+ * Copyright (c) 2002-2018, Mairie de Paris
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *  1. Redistributions of source code must retain the above copyright notice
+ *     and the following disclaimer.
+ *
+ *  2. Redistributions in binary form must reproduce the above copyright notice
+ *     and the following disclaimer in the documentation and/or other materials
+ *     provided with the distribution.
+ *
+ *  3. Neither the name of 'Mairie de Paris' nor 'Lutece' nor the names of its
+ *     contributors may be used to endorse or promote products derived from
+ *     this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * License 1.0
+ */
 package fr.paris.lutece.plugins.unittree.modules.sira.business.unit;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.util.sql.DAOUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ *
+ * UnitSiraDAO
+ *
+ */
 public class UnitSiraDAO implements IUnitSiraDAO
 {
-
-    private static final String SQL_QUERY_SELECT_UNIT_BY_GEOM = "SELECT DISTINCT uu.id_unit, uu.id_parent, uu.label, uu.description FROM unittree_unit uu"
-            + " INNER JOIN unittree_unit_sector uus ON uus.id_unit = uu.id_unit" + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector"
-            + " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true" + " AND uu.id_unit != 0";
+    private static final String SQL_GEOM_VALUE = ")', 4326))";
+    private static final String SQL_QUERY_SELECTED_VALUES = "SELECT unit.id_unit, unit.id_parent, unit.label, unit.description  FROM unittree_unit AS unit ";
+    private static final String SQL_QUERY_SELECT_UNIT_BY_GEOM = "SELECT DISTINCT uu.id_unit, uu.id_parent, uu.label, uu.description FROM unittree_unit uu" +
+        " INNER JOIN unittree_unit_sector uus ON uus.id_unit = uu.id_unit" +
+        " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector" +
+        " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true" +
+        " AND uu.id_unit != 0";
 
     @Override
     public Unit findUnitByGeomAndTypeSignalement( Double lng, Double lat, Long typeSignalementId )
     {
-        StringBuilder stringBuilder = new StringBuilder( );
-        stringBuilder.append( "SELECT unit.id_unit, unit.id_parent, unit.label, unit.description  FROM unittree_unit AS unit " );
+        StringBuilder stringBuilder = new StringBuilder(  );
+        stringBuilder.append( SQL_QUERY_SELECTED_VALUES );
         stringBuilder.append( "INNER JOIN unittree_unit_sector AS unit_sector ON unit_sector.id_unit = unit.id_unit  " );
         stringBuilder.append( "INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector" );
-        stringBuilder.append( " INNER JOIN signalement_type_signalement AS type_signalement ON type_signalement.fk_id_unit = unit.id_unit" );
+        stringBuilder.append( 
+            " INNER JOIN signalement_type_signalement AS type_signalement ON type_signalement.fk_id_unit = unit.id_unit" );
         stringBuilder.append( " WHERE type_signalement.id_type_signalement = ? " );
         stringBuilder.append( " AND ST_Contains(sector.geom, ST_GeomFromText('POINT(" );
         stringBuilder.append( lng );
         stringBuilder.append( " " );
         stringBuilder.append( lat );
-        stringBuilder.append( ")', 4326))" );
-        DAOUtil daoUtil = new DAOUtil( stringBuilder.toString( ) );
+        stringBuilder.append( SQL_GEOM_VALUE );
+
+        DAOUtil daoUtil = new DAOUtil( stringBuilder.toString(  ) );
         int index = 1;
         daoUtil.setLong( index++, typeSignalementId );
+
         return getSingleUnit( daoUtil );
     }
 
     @Override
     public Unit findUnitByGeomAndTypeEquipement( Double lng, Double lat, Long typeEquipementId )
     {
-        StringBuilder stringBuilder = new StringBuilder( );
-        stringBuilder.append( "SELECT unit.id_unit, unit.id_parent, unit.label, unit.description  FROM unittree_unit AS unit " );
+        StringBuilder stringBuilder = new StringBuilder(  );
+        stringBuilder.append( SQL_QUERY_SELECTED_VALUES );
         stringBuilder.append( "INNER JOIN unittree_unit_sector AS unit_sector ON unit_sector.id_unit = unit.id_unit  " );
         stringBuilder.append( "INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector" );
-        stringBuilder.append( " INNER JOIN equipement_type_equipement AS type_equipement ON type_equipement.fk_id_unit = unit.id_unit" );
+        stringBuilder.append( 
+            " INNER JOIN equipement_type_equipement AS type_equipement ON type_equipement.fk_id_unit = unit.id_unit" );
         stringBuilder.append( " WHERE type_equipement.id_type_equipement = ? " );
         stringBuilder.append( " AND ST_Contains(sector.geom, ST_GeomFromText('POINT(" );
         stringBuilder.append( lng );
         stringBuilder.append( " " );
         stringBuilder.append( lat );
-        stringBuilder.append( ")', 4326))" );
-        DAOUtil daoUtil = new DAOUtil( stringBuilder.toString( ) );
+        stringBuilder.append( SQL_GEOM_VALUE );
+
+        DAOUtil daoUtil = new DAOUtil( stringBuilder.toString(  ) );
         int index = 1;
         daoUtil.setLong( index++, typeEquipementId );
+
         return getSingleUnit( daoUtil );
     }
 
@@ -57,20 +105,20 @@ public class UnitSiraDAO implements IUnitSiraDAO
     {
         Unit unit = null;
         int nIndex = 1;
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        if ( daoUtil.next( ) )
+        if ( daoUtil.next(  ) )
         {
             nIndex = 1;
 
-            unit = new Unit( );
+            unit = new Unit(  );
             unit.setIdUnit( daoUtil.getInt( nIndex++ ) );
             unit.setIdParent( daoUtil.getInt( nIndex++ ) );
             unit.setLabel( daoUtil.getString( nIndex++ ) );
             unit.setDescription( daoUtil.getString( nIndex ) );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return unit;
     }
@@ -78,32 +126,37 @@ public class UnitSiraDAO implements IUnitSiraDAO
     @Override
     public Unit getUnitByUnitParentAndGeom( Double lng, Double lat, int idUnit )
     {
-        DAOUtil daoUtil = new DAOUtil( "SELECT unit.id_unit, unit.id_parent, unit.label, unit.description  FROM unittree_unit AS unit "
-                + "INNER JOIN unittree_unit_sector AS unit_sector ON unit_sector.id_unit = unit.id_unit " + "INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector "
-                + "WHERE unit.id_parent = ? AND ST_Contains(sector.geom, ST_GeomFromText('POINT(" + lng + " " + lat + ")', 4326))" );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTED_VALUES +
+                "INNER JOIN unittree_unit_sector AS unit_sector ON unit_sector.id_unit = unit.id_unit " +
+                "INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector " +
+                "WHERE unit.id_parent = ? AND ST_Contains(sector.geom, ST_GeomFromText('POINT(" + lng + " " + lat +
+                SQL_GEOM_VALUE );
         daoUtil.setInt( 1, idUnit );
+
         return getSingleUnit( daoUtil );
     }
 
     @Override
     public List<Unit> getUnitsLeafsByGeom( Double lng, Double lat )
     {
-        DAOUtil daoUtil = new DAOUtil(
-                "SELECT DISTINCT unit.id_unit, unit.id_parent, unit.label, unit.description FROM unittree_unit AS unit  INNER JOIN unittree_unit_sector AS unit_sector ON unit_sector.id_unit = unit.id_unit  INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector  LEFT OUTER JOIN unittree_unit AS son ON son.id_parent = unit.id_unit WHERE ST_Contains(sector.geom, ST_GeomFromText('POINT("
-                        + lng + " " + lat + ")', 4326)) AND son.id_parent IS NULL" );
+        DAOUtil daoUtil = new DAOUtil( 
+                "SELECT DISTINCT unit.id_unit, unit.id_parent, unit.label, unit.description FROM unittree_unit AS unit  INNER JOIN unittree_unit_sector AS unit_sector ON unit_sector.id_unit = unit.id_unit  INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector  LEFT OUTER JOIN unittree_unit AS son ON son.id_parent = unit.id_unit WHERE ST_Contains(sector.geom, ST_GeomFromText('POINT(" +
+                lng + " " + lat + ")', 4326)) AND son.id_parent IS NULL" );
+
         return loadListUnit( daoUtil );
     }
 
     private List<Unit> loadListUnit( DAOUtil daoUtil )
     {
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        List<Unit> listUnits = new ArrayList<Unit>( );
-        while ( daoUtil.next( ) )
+        List<Unit> listUnits = new ArrayList<Unit>(  );
+
+        while ( daoUtil.next(  ) )
         {
             int nIndex = 1;
 
-            Unit unit = new Unit( );
+            Unit unit = new Unit(  );
             unit.setIdUnit( daoUtil.getInt( nIndex++ ) );
             unit.setIdParent( daoUtil.getInt( nIndex++ ) );
             unit.setLabel( daoUtil.getString( nIndex++ ) );
@@ -112,7 +165,7 @@ public class UnitSiraDAO implements IUnitSiraDAO
             listUnits.add( unit );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
 
         return listUnits;
     }
@@ -129,14 +182,15 @@ public class UnitSiraDAO implements IUnitSiraDAO
         daoUtil.setDouble( nIndex++, lat );
         daoUtil.setInt( nIndex++, radius );
 
-        daoUtil.executeQuery( );
+        daoUtil.executeQuery(  );
 
-        List<Unit> listUnits = new ArrayList<Unit>( );
-        while ( daoUtil.next( ) )
+        List<Unit> listUnits = new ArrayList<Unit>(  );
+
+        while ( daoUtil.next(  ) )
         {
             nIndex = 1;
 
-            Unit unit = new Unit( );
+            Unit unit = new Unit(  );
             unit.setIdUnit( daoUtil.getInt( nIndex++ ) );
             unit.setIdParent( daoUtil.getInt( nIndex++ ) );
             unit.setLabel( daoUtil.getString( nIndex++ ) );
@@ -145,8 +199,8 @@ public class UnitSiraDAO implements IUnitSiraDAO
             listUnits.add( unit );
         }
 
-        daoUtil.free( );
+        daoUtil.free(  );
+
         return listUnits;
     }
-
 }

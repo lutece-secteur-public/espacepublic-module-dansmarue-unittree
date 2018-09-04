@@ -33,10 +33,11 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.business.sector;
 
-import java.io.Serializable;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
+
+import java.io.Serializable;
+
+import java.util.List;
 
 
 /**
@@ -63,6 +64,7 @@ public class SectorFilter implements Serializable
 
     /**
      * Get the sector name
+     *
      * @return the sector name
      */
     public String getSectorName(  )
@@ -72,7 +74,9 @@ public class SectorFilter implements Serializable
 
     /**
      * Set the sector name
-     * @param strSectorName the sector name
+     *
+     * @param strSectorName
+     *            the sector name
      */
     public void setSectorName( String strSectorName )
     {
@@ -81,6 +85,7 @@ public class SectorFilter implements Serializable
 
     /**
      * Check if the filter contains the sector name
+     *
      * @return true if it contains, false otherwise
      */
     public boolean containsSectorName(  )
@@ -90,6 +95,7 @@ public class SectorFilter implements Serializable
 
     /**
      * Get the list of ids sector
+     *
      * @return the list of ids sector
      */
     public List<Integer> getListIdsSector(  )
@@ -99,7 +105,9 @@ public class SectorFilter implements Serializable
 
     /**
      * Set the list of ids sector
-     * @param listIdsSector the list of ids sector
+     *
+     * @param listIdsSector
+     *            the list of ids sector
      */
     public void setListIdsSector( List<Integer> listIdsSector )
     {
@@ -108,6 +116,7 @@ public class SectorFilter implements Serializable
 
     /**
      * Check if the filter contains the list of ids sector
+     *
      * @return true if it contains, false otherwise
      */
     public boolean containsListIdsSector(  )
@@ -116,9 +125,10 @@ public class SectorFilter implements Serializable
     }
 
     /**
-     * Set true if it the filter must exclude the ids sector set
-     * in {@link #_listIdsSector}
-     * @param bExcludeIdsSector true if it must exclude, false otherwise
+     * Set true if it the filter must exclude the ids sector set in {@link #_listIdsSector}
+     *
+     * @param bExcludeIdsSector
+     *            true if it must exclude, false otherwise
      */
     public void setExcludeIdsSector( boolean bExcludeIdsSector )
     {
@@ -126,8 +136,8 @@ public class SectorFilter implements Serializable
     }
 
     /**
-     * Returns true if it the filter must exclude the ids sector set
-     * in {@link #_listIdsSector}
+     * Returns true if it the filter must exclude the ids sector set in {@link #_listIdsSector}
+     *
      * @return true if it must exclude, false otherwise
      */
     public boolean isExcludeIdsSector(  )
@@ -137,7 +147,9 @@ public class SectorFilter implements Serializable
 
     /**
      * Set the num sector
-     * @param strSectorNum the num sector
+     *
+     * @param strSectorNum
+     *            the num sector
      */
     public void setSectorNum( String strSectorNum )
     {
@@ -146,6 +158,7 @@ public class SectorFilter implements Serializable
 
     /**
      * Get the num sector
+     *
      * @return the num sector
      */
     public String getSectorNum(  )
@@ -155,6 +168,7 @@ public class SectorFilter implements Serializable
 
     /**
      * Check if the filter contains the num sector
+     *
      * @return true if it contains, false otherwise
      */
     public boolean containsSectorNum(  )

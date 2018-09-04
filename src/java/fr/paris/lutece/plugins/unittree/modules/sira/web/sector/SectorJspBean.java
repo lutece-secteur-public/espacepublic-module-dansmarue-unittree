@@ -33,13 +33,6 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.web.sector;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang.StringUtils;
-
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.plugins.unittree.modules.sira.business.sector.SectorFilter;
 import fr.paris.lutece.plugins.unittree.modules.sira.service.role.SectorResourceIdService;
@@ -52,10 +45,18 @@ import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.service.rbac.RBACService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
+import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.web.admin.PluginAdminPageJspBean;
 import fr.paris.lutece.portal.web.constants.Messages;
 import fr.paris.lutece.util.html.HtmlTemplate;
 import fr.paris.lutece.util.url.UrlItem;
+
+import org.apache.commons.lang.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -86,15 +87,17 @@ public class SectorJspBean extends PluginAdminPageJspBean
     private static final String JSP_MODIFY_SECTOR = "ModifySector.jsp";
     private static final String JSP_DELETE_SECTOR = "jsp/admin/plugins/unittree/modules/sira/DoDeleteSectors.jsp";
     private static final String TEMPLATE_DELETE_SECTOR = "admin/plugins/unittree/modules/sira/sector_delete.html";
+
+    // MARKER
+    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
     private ISectorService _sectorService = SpringContextService.getBean( BEAN_SECTOR_SERVICE );
     private IUnitService _unitService = SpringContextService.getBean( BEAN_UNIT_SERVICE );
 
-    //MARKER
-    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
-
     /**
      * Do add sectors
-     * @param request the HTTP request
+     *
+     * @param request
+     *            the HTTP request
      * @return the JSP return
      */
     public String doAddSectors( HttpServletRequest request )
@@ -126,6 +129,8 @@ public class SectorJspBean extends PluginAdminPageJspBean
         }
         catch ( UnitErrorException e )
         {
+            AppLogService.error( e.getMessage(  ), e );
+
             return AdminMessageService.getMessageUrl( request, e.getI18nErrorMessage(  ), AdminMessage.TYPE_STOP );
         }
 
@@ -139,7 +144,9 @@ public class SectorJspBean extends PluginAdminPageJspBean
 
     /**
      * Do remove sectors
-     * @param request the HTTP request
+     *
+     * @param request
+     *            the HTTP request
      * @return the JSP return
      */
     public String doRemoveSector( HttpServletRequest request )
@@ -180,6 +187,14 @@ public class SectorJspBean extends PluginAdminPageJspBean
         return url.getUrl(  );
     }
 
+    /**
+     *
+     * Get the delete sector's jsp
+     *
+     * @param request
+     *            the HTTP request
+     * @return the JSP return
+     */
     public String getDeleteSectors( HttpServletRequest request )
     {
         String strJspBack = JSP_MODIFY_SECTOR;
@@ -192,19 +207,24 @@ public class SectorJspBean extends PluginAdminPageJspBean
         }
         catch ( NumberFormatException e )
         {
-            return AdminMessageService.getMessageUrl( request, MESSAGE_ERROR,
-                    AdminMessage.TYPE_STOP );
+            return AdminMessageService.getMessageUrl( request, MESSAGE_ERROR, AdminMessage.TYPE_STOP );
         }
 
-        Map<String, Object> urlParam = new HashMap<String, Object>( );
+        Map<String, Object> urlParam = new HashMap<String, Object>(  );
         urlParam.put( PARAMETER_ID_SECTOR, nIdSector );
 
         return AdminMessageService.getMessageUrl( request, MESSAGE_TITLE_DELETE_TYPE_OBJET, null,
-                MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET, JSP_DELETE_SECTOR, "_self", AdminMessage.TYPE_CONFIRMATION,
-                urlParam, strJspBack );
-
+            MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET, JSP_DELETE_SECTOR, "_self", AdminMessage.TYPE_CONFIRMATION,
+            urlParam, strJspBack );
     }
 
+    /**
+     * Delete the sector
+     *
+     * @param request
+     *            the HTTP request
+     * @return the JSP return
+     */
     public String doDeleteSectors( HttpServletRequest request )
     {
         String strIdSector = request.getParameter( PARAMETER_ID_SECTOR );
@@ -217,14 +237,20 @@ public class SectorJspBean extends PluginAdminPageJspBean
 
         UrlItem url = new UrlItem( JSP_MODIFY_SECTOR );
         url.addParameter( PARAMETER_ID_UNIT, 0 );
-        return url.getUrl( );
+
+        return url.getUrl(  );
     }
 
+    /**
+     * Modify sectors
+     *
+     * @param request
+     *            the HTTP request
+     * @return the JSP return
+     */
     public String getModifySectors( HttpServletRequest request )
     {
-
-        Map<String, Object> model = new HashMap<String, Object>( );
-
+        Map<String, Object> model = new HashMap<String, Object>(  );
 
         int nIdUnit = -1;
 
@@ -235,22 +261,23 @@ public class SectorJspBean extends PluginAdminPageJspBean
             nIdUnit = Integer.parseInt( strIdUnit );
         }
 
-        SectorUnitAttributeComponent sectorUnitAttributeComponent = new SectorUnitAttributeComponent( );
+        SectorUnitAttributeComponent sectorUnitAttributeComponent = new SectorUnitAttributeComponent(  );
+
         // Build the sector filter for search
         SectorFilter sFilter = sectorUnitAttributeComponent.buildFilter( request );
 
         Unit targetUnit = _unitService.getUnit( nIdUnit, false );
+
         // Check permissions
-        if ( !RBACService.isAuthorized( targetUnit, SectorResourceIdService.PERMISSION_SUPPRIMER_SECTEUR, getUser( ) ) )
+        if ( !RBACService.isAuthorized( targetUnit, SectorResourceIdService.PERMISSION_DELETE_SECTOR, getUser(  ) ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.USER_ACCESS_DENIED, AdminMessage.TYPE_STOP );
         }
 
         model.put( MARK_LIST_AVAILABLE_SECTORS, _sectorService.findAvailableSectors( sFilter, nIdUnit ) );
 
-        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DELETE_SECTOR, getLocale( ), model );
-        return getAdminPage( template.getHtml( ) );
+        HtmlTemplate template = AppTemplateService.getTemplate( TEMPLATE_DELETE_SECTOR, getLocale(  ), model );
 
+        return getAdminPage( template.getHtml(  ) );
     }
-
 }

@@ -33,16 +33,6 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.sira.web.sector;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
-
 import fr.paris.lutece.plugins.unittree.modules.sira.business.sector.Sector;
 import fr.paris.lutece.plugins.unittree.modules.sira.business.sector.SectorFilter;
 import fr.paris.lutece.plugins.unittree.modules.sira.service.sector.ISectorService;
@@ -50,6 +40,18 @@ import fr.paris.lutece.plugins.unittree.service.unit.IUnitService;
 import fr.paris.lutece.plugins.unittree.web.unit.IUnitAttributeComponent;
 import fr.paris.lutece.portal.business.user.AdminUser;
 import fr.paris.lutece.portal.service.util.AppLogService;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
+
+import java.lang.reflect.InvocationTargetException;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -143,7 +145,9 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
 
     /**
      * Check if user has clicked on the button to search sectors
-     * @param request the HTTP request
+     *
+     * @param request
+     *            the HTTP request
      * @return true if it is a search action, false otherwise
      */
     private boolean isSearch( HttpServletRequest request )
@@ -153,9 +157,12 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
 
     /**
      * Build the filter
-     * @param request the HTTP request
+     *
+     * @param request
+     *            the HTTP request
      * @return a {@link SectorFilter}
      */
+    @SuppressWarnings( "unchecked" )
     public SectorFilter buildFilter( HttpServletRequest request )
     {
         SectorFilter sFilter = new SectorFilter(  );
