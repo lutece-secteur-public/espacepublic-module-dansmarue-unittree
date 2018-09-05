@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="row-fluid">	
+		<legend>
+			#i18n{module.unittree.sira.deleteSector.label}
+		</legend>
+		<#if listAvailableSectors?? && listAvailableSectors?has_content>
+			<form class="form-horizontal" method="post" action="jsp/admin/plugins/unittree/modules/sira/DeleteSectors.jsp">
+				<div class="row">
+					<fieldset>
+						<div class="form-group">
+							<label class="<@labelStyle />" for="#i18n{ramen.newarrond.addarrond.label}">
+								#i18n{module.unittree.sira.unit.action.modifySector.available} :
+							</label>
+							<div class="<@inputStyle />">
+								<select class="form-control input-sm" name="idSector" size="1" ">
+							    	<#list listAvailableSectors as availableSector>
+							    		<option value="${availableSector.idSector!}">
+							    			${availableSector.name!} <#if availableSector.numberSector?? && availableSector.numberSector != ''>(${availableSector.numberSector!})</#if>
+							    		</option>
+							    	</#list>
+								</select>
+							</div>
+						</div>
+						<div class="form-actions">
+							<div class="form-group">
+								<label class="<@labelStyle />">
+									&nbsp;
+								</label>
+								<div class="<@inputStyle />">
+									<button class="btn btn-danger btn-sm" type="submit" name="deleteSectors">
+										<i class="glyphicon glyphicon-trash"></i>
+										#i18n{module.unittree.sira.sectorUnitAttribute.buttonDeleteSector}
+									</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</form>
+		<#else>
+			<strong>
+				#i18n{module.unittree.sira.sectorUnitAttribute.labelNoAvailableSectors}
+			</strong>
+		</#if>
+	</div>
+</div>
