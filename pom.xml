@@ -129,9 +129,9 @@
   	</build>
 
      <scm>
-        <connection>scm:git:http://gestionversion.acn/applications_lutece/module-unittree-signalement.git</connection>
-        <developerConnection>scm:git:http://gestionversion.acn/applications_lutece/module-unittree-signalement.git</developerConnection>
-        <url>http://gestionversion.acn/applications_lutece/module-unittree-signalement.git</url>
+        <connection>scm:git:https://github.com/lutece-secteur-public/espacepublic-module-dansmarue-unittree.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-secteur-public/espacepublic-module-dansmarue-unittree.git</developerConnection>
+        <url>https://github.com/lutece-secteur-public/espacepublic-module-dansmarue-unittree.git</url>
 		<tag>HEAD</tag>
     </scm>
     <groupId>fr.paris.lutece.plugins</groupId>
