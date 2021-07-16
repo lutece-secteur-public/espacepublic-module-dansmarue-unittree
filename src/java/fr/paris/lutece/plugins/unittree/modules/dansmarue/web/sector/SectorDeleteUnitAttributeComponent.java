@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,18 +55,18 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
 {
 
     /** The Constant NAME. */
-    private static final String NAME                         = "Sector delete";
+    private static final String NAME = "Sector delete";
 
     /** The Constant PARAMETER_SEARCH_SECTORS. */
     // PARAMETERS
-    private static final String PARAMETER_SEARCH_SECTORS     = "searchSectors";
+    private static final String PARAMETER_SEARCH_SECTORS = "searchSectors";
 
     /** The Constant PARAMETER_ID_UNIT. */
-    private static final String PARAMETER_ID_UNIT            = "idUnit";
+    private static final String PARAMETER_ID_UNIT = "idUnit";
 
     /** The Constant MARK_LIST_AVAILABLE_SECTORS. */
     // MARKS
-    private static final String MARK_LIST_AVAILABLE_SECTORS  = "listAvailableSectors";
+    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
 
     /** The Constant TEMPLATE_ATTRIBUTE_COMPONENT. */
     // TEMPLATES
@@ -74,7 +74,7 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
 
     /** The sector service. */
     @Inject
-    private ISectorService      _sectorService;
+    private ISectorService _sectorService;
 
     /**
      * {@inheritDoc}
@@ -156,7 +156,7 @@ public class SectorDeleteUnitAttributeComponent implements IUnitAttributeCompone
             {
                 BeanUtils.populate( sFilter, request.getParameterMap( ) );
             }
-            catch ( InvocationTargetException | IllegalAccessException e )
+            catch( InvocationTargetException | IllegalAccessException e )
             {
                 AppLogService.error( e.getMessage( ), e );
             }

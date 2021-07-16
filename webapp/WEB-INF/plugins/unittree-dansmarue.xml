@@ -2,7 +2,7 @@
     <!-- Plugin Informations -->
     <name>unittree-dansmarue</name>
     <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
-    <version>6.3.0</version>
+    <version>6.5.2-SNAPSHOT</version>
     <documentation/>
     <installation/>
     <changes/>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,6 @@ import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 
 import java.util.List;
 
-
-
 /**
  * IUnitSiraDAO.
  */
@@ -58,9 +56,12 @@ public interface IUnitSiraDAO
     /**
      * Find unit by geom and type signalement.
      *
-     * @param lng the lng
-     * @param lat the lat
-     * @param typeSignalementId the type signalement id
+     * @param lng
+     *            the lng
+     * @param lat
+     *            the lat
+     * @param typeSignalementId
+     *            the type signalement id
      * @return the unit
      */
     Unit findUnitByGeomAndTypeSignalement( Double lng, Double lat, Long typeSignalementId );
@@ -68,9 +69,12 @@ public interface IUnitSiraDAO
     /**
      * Gets the unit by unit parent and geom.
      *
-     * @param lng the lng
-     * @param lat the lat
-     * @param nIdUnit the n id unit
+     * @param lng
+     *            the lng
+     * @param lat
+     *            the lat
+     * @param nIdUnit
+     *            the n id unit
      * @return the unit by unit parent and geom
      */
     Unit getUnitByUnitParentAndGeom( Double lng, Double lat, int nIdUnit );
@@ -78,9 +82,12 @@ public interface IUnitSiraDAO
     /**
      * Search for all units withing a radius from a given location.
      *
-     * @param lng            longitude of the location
-     * @param lat            latitude of the location
-     * @param radius            radius to search from
+     * @param lng
+     *            longitude of the location
+     * @param lat
+     *            latitude of the location
+     * @param radius
+     *            radius to search from
      * @return Units withing a given radius from a location
      */
     List<Unit> findUnitsByGeom( Double lng, Double lat, Integer radius );
@@ -88,9 +95,12 @@ public interface IUnitSiraDAO
     /**
      * Find unit by geom and type equipement.
      *
-     * @param lng the lng
-     * @param lat the lat
-     * @param typeSEquipementId the type S equipement id
+     * @param lng
+     *            the lng
+     * @param lat
+     *            the lat
+     * @param typeSEquipementId
+     *            the type S equipement id
      * @return the unit
      */
     Unit findUnitByGeomAndTypeEquipement( Double lng, Double lat, Long typeSEquipementId );

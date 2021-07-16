@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,14 +40,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-
-
 /**
  * The Class UnitSiraService.
  */
 public class UnitSiraService implements IUnitSiraService
 {
-    
+
     /** The dao. */
     @Autowired
     private IUnitSiraDAO _dao;

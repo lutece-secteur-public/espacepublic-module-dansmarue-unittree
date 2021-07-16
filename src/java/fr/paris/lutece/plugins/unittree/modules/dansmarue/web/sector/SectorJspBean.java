@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,60 +64,60 @@ import fr.paris.lutece.util.url.UrlItem;
 public class SectorJspBean extends PluginAdminPageJspBean
 {
 
-    private static final long        serialVersionUID                       = -2541980958666656404L;
+    private static final long serialVersionUID = -2541980958666656404L;
 
     /** The Constant BEAN_SECTOR_SERVICE. */
-    private static final String      BEAN_SECTOR_SERVICE                    = "unittree-dansmarue.sectorService";
+    private static final String BEAN_SECTOR_SERVICE = "unittree-dansmarue.sectorService";
 
     /** The Constant BEAN_UNIT_SERVICE. */
-    private static final String      BEAN_UNIT_SERVICE                      = "unittree.unitService";
+    private static final String BEAN_UNIT_SERVICE = "unittree.unitService";
 
     /** The Constant MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET. */
     // MESSAGES
-    private static final String      MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET = "module.unittree.dansmarue.message.deletesector.confirmation";
+    private static final String MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET = "module.unittree.dansmarue.message.deletesector.confirmation";
 
     /** The Constant MESSAGE_TITLE_DELETE_TYPE_OBJET. */
-    private static final String      MESSAGE_TITLE_DELETE_TYPE_OBJET        = "module.unittree.dansmarue.messagetitle.deletesector.confirmation";
+    private static final String MESSAGE_TITLE_DELETE_TYPE_OBJET = "module.unittree.dansmarue.messagetitle.deletesector.confirmation";
 
     /** The Constant MESSAGE_ERROR. */
-    private static final String      MESSAGE_ERROR                          = "module.unittree.dansmarue.message.error.erroroccur";
+    private static final String MESSAGE_ERROR = "module.unittree.dansmarue.message.error.erroroccur";
 
     /** The Constant MESSAGE_ERROR_UNIT_NOT_FOUND. */
-    private static final String      MESSAGE_ERROR_UNIT_NOT_FOUND           = "module.unittree.dansmarue.message.error.unitNotFound";
+    private static final String MESSAGE_ERROR_UNIT_NOT_FOUND = "module.unittree.dansmarue.message.error.unitNotFound";
 
     /** The Constant ANCHOR_ASSOCIATED_SECTORS. */
     // ANCHOR
-    private static final String      ANCHOR_ASSOCIATED_SECTORS              = "dansmarue-associated-sectors";
+    private static final String ANCHOR_ASSOCIATED_SECTORS = "dansmarue-associated-sectors";
 
     /** The Constant PARAMETER_ID_UNIT. */
     // PARAMETERS
-    private static final String      PARAMETER_ID_UNIT                      = "idUnit";
+    private static final String PARAMETER_ID_UNIT = "idUnit";
 
     /** The Constant PARAMETER_ID_SECTOR. */
-    private static final String      PARAMETER_ID_SECTOR                    = "idSector";
+    private static final String PARAMETER_ID_SECTOR = "idSector";
 
     /** The Constant JSP_MODIFY_UNIT. */
     // JSP
-    private static final String      JSP_MODIFY_UNIT                        = "../../ModifyUnit.jsp";
+    private static final String JSP_MODIFY_UNIT = "../../ModifyUnit.jsp";
 
     /** The Constant JSP_MODIFY_SECTOR. */
-    private static final String      JSP_MODIFY_SECTOR                      = "ModifySector.jsp";
+    private static final String JSP_MODIFY_SECTOR = "ModifySector.jsp";
 
     /** The Constant JSP_DELETE_SECTOR. */
-    private static final String      JSP_DELETE_SECTOR                      = "jsp/admin/plugins/unittree/modules/dansmarue/DoDeleteSectors.jsp";
+    private static final String JSP_DELETE_SECTOR = "jsp/admin/plugins/unittree/modules/dansmarue/DoDeleteSectors.jsp";
 
     /** The Constant TEMPLATE_DELETE_SECTOR. */
-    private static final String      TEMPLATE_DELETE_SECTOR                 = "admin/plugins/unittree/modules/dansmarue/sector_delete.html";
+    private static final String TEMPLATE_DELETE_SECTOR = "admin/plugins/unittree/modules/dansmarue/sector_delete.html";
 
     /** The Constant MARK_LIST_AVAILABLE_SECTORS. */
     // MARKER
-    private static final String      MARK_LIST_AVAILABLE_SECTORS            = "listAvailableSectors";
+    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
 
     /** The sector service. */
-    private transient ISectorService _sectorService                         = SpringContextService.getBean( BEAN_SECTOR_SERVICE );
+    private transient ISectorService _sectorService = SpringContextService.getBean( BEAN_SECTOR_SERVICE );
 
     /** The unit service. */
-    private transient IUnitService   _unitService                           = SpringContextService.getBean( BEAN_UNIT_SERVICE );
+    private transient IUnitService _unitService = SpringContextService.getBean( BEAN_UNIT_SERVICE );
 
     /**
      * Do add sectors.
@@ -153,7 +153,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         {
             _sectorService.populate( unit, request );
         }
-        catch ( UnitErrorException e )
+        catch( UnitErrorException e )
         {
             AppLogService.error( e.getMessage( ), e );
 
@@ -230,7 +230,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         {
             nIdSector = Integer.parseInt( strIdSector );
         }
-        catch ( NumberFormatException e )
+        catch( NumberFormatException e )
         {
             return AdminMessageService.getMessageUrl( request, MESSAGE_ERROR, AdminMessage.TYPE_STOP );
         }
@@ -238,8 +238,8 @@ public class SectorJspBean extends PluginAdminPageJspBean
         Map<String, Object> urlParam = new HashMap<>( );
         urlParam.put( PARAMETER_ID_SECTOR, nIdSector );
 
-        return AdminMessageService.getMessageUrl( request, MESSAGE_TITLE_DELETE_TYPE_OBJET, null, MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET, JSP_DELETE_SECTOR, "_self", AdminMessage.TYPE_CONFIRMATION,
-                urlParam, strJspBack );
+        return AdminMessageService.getMessageUrl( request, MESSAGE_TITLE_DELETE_TYPE_OBJET, null, MESSAGE_CONFIRMATION_DELETE_TYPE_OBJET, JSP_DELETE_SECTOR,
+                "_self", AdminMessage.TYPE_CONFIRMATION, urlParam, strJspBack );
     }
 
     /**

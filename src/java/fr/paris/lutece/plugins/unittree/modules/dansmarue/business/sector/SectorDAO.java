@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,106 +51,107 @@ public class SectorDAO implements ISectorDAO
 
     /** The Constant SQL_QUERY_SELECT. */
     // SQL QUERIES
-    private static final String SQL_QUERY_SELECT                                       = " SELECT id_sector, name, number_sector FROM unittree_sector WHERE id_sector = ? ORDER BY name ASC ";
+    private static final String SQL_QUERY_SELECT = " SELECT id_sector, name, number_sector FROM unittree_sector WHERE id_sector = ? ORDER BY name ASC ";
 
     /** The Constant SQL_QUERY_SELECT_BY_ID_UNIT. */
-    private static final String SQL_QUERY_SELECT_BY_ID_UNIT                            = " SELECT s.id_sector, s.name, s.number_sector "
+    private static final String SQL_QUERY_SELECT_BY_ID_UNIT = " SELECT s.id_sector, s.name, s.number_sector "
             + " FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector " + " WHERE u.id_unit = ? ORDER BY s.id_sector ";
 
     /** The Constant SQL_QUERY_SELECT_ALL. */
-    private static final String SQL_QUERY_SELECT_ALL                                   = " SELECT id_sector, name, number_sector FROM unittree_sector ";
+    private static final String SQL_QUERY_SELECT_ALL = " SELECT id_sector, name, number_sector FROM unittree_sector ";
 
     /** The Constant SQL_QUERY_ADD_SECTOR_TO_UNIT. */
-    private static final String SQL_QUERY_ADD_SECTOR_TO_UNIT                           = " INSERT INTO unittree_unit_sector ( id_unit, id_sector ) VALUES ( ?, ? ) ";
+    private static final String SQL_QUERY_ADD_SECTOR_TO_UNIT = " INSERT INTO unittree_unit_sector ( id_unit, id_sector ) VALUES ( ?, ? ) ";
 
     /** The Constant SQL_QUERY_HAS_SECTOR. */
-    private static final String SQL_QUERY_HAS_SECTOR                                   = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
+    private static final String SQL_QUERY_HAS_SECTOR = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
 
     /** The Constant SQL_QUERY_HAS_SECTORS. */
-    private static final String SQL_QUERY_HAS_SECTORS                                  = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? ";
+    private static final String SQL_QUERY_HAS_SECTORS = " SELECT id_unit, id_sector FROM unittree_unit_sector WHERE id_unit = ? ";
 
     /** The Constant SQL_QUERY_IS_ASSOCIATED. */
-    private static final String SQL_QUERY_IS_ASSOCIATED                                = " SELECT id_sector FROM unittree_unit_sector WHERE id_sector = ? ";
+    private static final String SQL_QUERY_IS_ASSOCIATED = " SELECT id_sector FROM unittree_unit_sector WHERE id_sector = ? ";
 
     /** The Constant SQL_QUERY_REMOVE_SECTORS_FROM_UNIT. */
-    private static final String SQL_QUERY_REMOVE_SECTORS_FROM_UNIT                     = " DELETE FROM unittree_unit_sector WHERE id_unit = ? ";
+    private static final String SQL_QUERY_REMOVE_SECTORS_FROM_UNIT = " DELETE FROM unittree_unit_sector WHERE id_unit = ? ";
 
     /** The Constant SQL_QUERY_REMOVE. */
-    private static final String SQL_QUERY_REMOVE                                       = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
+    private static final String SQL_QUERY_REMOVE = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector = ? ";
 
     /** The Constant SQL_QUERY_SELECT_UNITS_WITH_NO_CHILDREN_BY_ID_SECTOR. */
-    private static final String SQL_QUERY_SELECT_UNITS_WITH_NO_CHILDREN_BY_ID_SECTOR   = " SELECT uu.id_unit, uu.id_parent, uu.label, uu.description " + " FROM unittree_unit AS uu "
-            + " INNER JOIN unittree_unit_sector AS us ON uu.id_unit = us.id_unit " + " WHERE uu.id_unit NOT IN(SELECT id_parent FROM unittree_unit) AND us.id_sector = ? ";
+    private static final String SQL_QUERY_SELECT_UNITS_WITH_NO_CHILDREN_BY_ID_SECTOR = " SELECT uu.id_unit, uu.id_parent, uu.label, uu.description "
+            + " FROM unittree_unit AS uu " + " INNER JOIN unittree_unit_sector AS us ON uu.id_unit = us.id_unit "
+            + " WHERE uu.id_unit NOT IN(SELECT id_parent FROM unittree_unit) AND us.id_sector = ? ";
 
     /** The Constant SQL_QUERY_SELECT_AVAILABLE_SECTORS. */
-    private static final String SQL_QUERY_SELECT_AVAILABLE_SECTORS                     = " SELECT s.id_sector, s.name, s.number_sector FROM unittree_sector AS s "
+    private static final String SQL_QUERY_SELECT_AVAILABLE_SECTORS = " SELECT s.id_sector, s.name, s.number_sector FROM unittree_sector AS s "
             + " WHERE s.id_sector NOT IN ( SELECT us.id_sector FROM unittree_unit_sector AS us ) ";
 
     /** The Constant SQL_WHERE. */
-    private static final String SQL_WHERE                                              = " WHERE ";
+    private static final String SQL_WHERE = " WHERE ";
 
     /** The Constant SQL_NOT. */
-    private static final String SQL_NOT                                                = " NOT ";
+    private static final String SQL_NOT = " NOT ";
 
     /** The Constant SQL_IN. */
-    private static final String SQL_IN                                                 = " IN ";
+    private static final String SQL_IN = " IN ";
 
     /** The Constant SQL_AND. */
-    private static final String SQL_AND                                                = " AND ";
+    private static final String SQL_AND = " AND ";
 
     /** The Constant SQL_LIKE. */
-    private static final String SQL_LIKE                                               = " LIKE ";
+    private static final String SQL_LIKE = " LIKE ";
 
     /** The Constant SQL_UPPER. */
-    private static final String SQL_UPPER                                              = " UPPER ";
+    private static final String SQL_UPPER = " UPPER ";
 
     /** The Constant SQL_FILTER_NAME. */
-    private static final String SQL_FILTER_NAME                                        = " name ";
+    private static final String SQL_FILTER_NAME = " name ";
 
     /** The Constant SQL_FILTER_NUMBER_SECTOR. */
-    private static final String SQL_FILTER_NUMBER_SECTOR                               = " number_sector ";
+    private static final String SQL_FILTER_NUMBER_SECTOR = " number_sector ";
 
     /** The Constant SQL_FILTER_ID_SECTOR. */
-    private static final String SQL_FILTER_ID_SECTOR                                   = " id_sector ";
+    private static final String SQL_FILTER_ID_SECTOR = " id_sector ";
 
     /** The Constant SQL_ORDER_BY_NAME_ASC. */
-    private static final String SQL_ORDER_BY_NAME_ASC                                  = " ORDER BY name ASC ";
+    private static final String SQL_ORDER_BY_NAME_ASC = " ORDER BY name ASC ";
 
     /** The Constant SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID. */
-    private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID          = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = ? ) AND unit.id_unit = ? ORDER BY s.id_sector ";
+    private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = ? ) AND unit.id_unit = ? ORDER BY s.id_sector ";
 
     /** The Constant SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_SPECIFIC_DEVE_UNIT. */
     private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_SPECIFIC_DEVE_UNIT = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = 260 ) AND unit.id_unit = ? ORDER BY s.id_sector ";
 
     /** The Constant SQL_QUERY_DELETE_SECTOR. */
-    private static final String SQL_QUERY_DELETE_SECTOR                                = "DELETE FROM unittree_sector WHERE id_sector = ? ";
+    private static final String SQL_QUERY_DELETE_SECTOR = "DELETE FROM unittree_sector WHERE id_sector = ? ";
 
     /** The Constant SQL_QUERY_DELETE_LIST_SECTORS_FROM_LIST_UNITS. */
-    private static final String SQL_QUERY_DELETE_LIST_SECTORS_FROM_LIST_UNITS          = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector IN ( ";
+    private static final String SQL_QUERY_DELETE_LIST_SECTORS_FROM_LIST_UNITS = " DELETE FROM unittree_unit_sector WHERE id_unit = ? AND id_sector IN ( ";
 
     /** The Constant SQL_QUERY_SELECT_SECTOR_BY_DIRECTION_AND_GEOM. */
-    private static final String SQL_QUERY_SELECT_SECTOR_BY_DIRECTION_AND_GEOM          = "SELECT DISTINCT us.id_sector, us.name, us.number_sector" + " FROM unittree_unit_sector uus"
-            + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector" + " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true"
-            + " AND uus.id_unit IN ({0})";
+    private static final String SQL_QUERY_SELECT_SECTOR_BY_DIRECTION_AND_GEOM = "SELECT DISTINCT us.id_sector, us.name, us.number_sector"
+            + " FROM unittree_unit_sector uus" + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector"
+            + " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true" + " AND uus.id_unit IN ({0})";
 
     /** The Constant SQL_QUERY_SELECT_DIRECTION_ID_BY_SECTOR_ID. */
-    private static final String SQL_QUERY_SELECT_DIRECTION_ID_BY_SECTOR_ID             = "SELECT unit.id_unit FROM unittree_unit_sector uus INNER JOIN unittree_unit unit ON unit.id_unit = uus.id_unit WHERE id_sector = ? AND unit.id_parent = 0";
+    private static final String SQL_QUERY_SELECT_DIRECTION_ID_BY_SECTOR_ID = "SELECT unit.id_unit FROM unittree_unit_sector uus INNER JOIN unittree_unit unit ON unit.id_unit = uus.id_unit WHERE id_sector = ? AND unit.id_parent = 0";
 
     /** The Constant OPEN_BRACKET. */
     // CONSTANTS
-    private static final String OPEN_BRACKET                                           = " ( ";
+    private static final String OPEN_BRACKET = " ( ";
 
     /** The Constant CLOSED_BRACKET. */
-    private static final String CLOSED_BRACKET                                         = " ) ";
+    private static final String CLOSED_BRACKET = " ) ";
 
     /** The Constant QUESTION_MARK. */
-    private static final String QUESTION_MARK                                          = " ? ";
+    private static final String QUESTION_MARK = " ? ";
 
     /** The Constant COMMA. */
-    private static final String COMMA                                                  = " , ";
+    private static final String COMMA = " , ";
 
     /** The Constant PERCENT. */
-    private static final String PERCENT                                                = "%";
+    private static final String PERCENT = "%";
 
     /**
      * {@inheritDoc}
@@ -235,7 +236,8 @@ public class SectorDAO implements ISectorDAO
     }
 
     /**
-     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's in the "select" list.
+     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
+     * in the "select" list.
      *
      * @param nIdUnit
      *            the n id unit
@@ -632,8 +634,8 @@ public class SectorDAO implements ISectorDAO
     public Sector getSectorByGeomAndIdUnitParent( Double lng, Double lat, Integer idUnitParent )
     {
         DAOUtil daoUtil = new DAOUtil( "SELECT unittree_sector.id_sector, unittree_sector.\"name\", unittree_sector.number_sector FROM unittree_sector "
-                + " INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector " + " WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT(" + lng + " "
-                + lat + ")', 4326)) AND unittree_unit_sector.id_unit = ?" );
+                + " INNER JOIN unittree_unit_sector ON unittree_unit_sector.id_sector = unittree_sector.id_sector "
+                + " WHERE ST_Contains(unittree_sector.geom, ST_GeomFromText('POINT(" + lng + " " + lat + ")', 4326)) AND unittree_unit_sector.id_unit = ?" );
         daoUtil.setInt( 1, idUnitParent );
         daoUtil.executeQuery( );
 
@@ -773,11 +775,11 @@ public class SectorDAO implements ISectorDAO
     public List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer radius, List<Integer> idUnits )
     {
         int listeLength = idUnits.size( );
-        Character[] array = new Character[listeLength];
+        Character [ ] array = new Character [ listeLength];
 
         for ( int i = 0; i < listeLength; i++ )
         {
-            array[i] = '?';
+            array [i] = '?';
         }
 
         String unionQuery = StringUtils.join( array, COMMA );

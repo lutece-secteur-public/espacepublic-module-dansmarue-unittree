@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,10 +46,10 @@ public class UnitSiraDAO implements IUnitSiraDAO
 {
 
     /** The Constant SQL_GEOM_VALUE. */
-    private static final String SQL_GEOM_VALUE                = ")', 4326))";
+    private static final String SQL_GEOM_VALUE = ")', 4326))";
 
     /** The Constant SQL_QUERY_SELECTED_VALUES. */
-    private static final String SQL_QUERY_SELECTED_VALUES     = "SELECT unit.id_unit, unit.id_parent, unit.label, unit.description  FROM unittree_unit AS unit ";
+    private static final String SQL_QUERY_SELECTED_VALUES = "SELECT unit.id_unit, unit.id_parent, unit.label, unit.description  FROM unittree_unit AS unit ";
 
     /** The Constant SQL_QUERY_SELECT_UNIT_BY_GEOM. */
     private static final String SQL_QUERY_SELECT_UNIT_BY_GEOM = "SELECT DISTINCT uu.id_unit, uu.id_parent, uu.label, uu.description FROM unittree_unit uu"
@@ -166,8 +166,8 @@ public class UnitSiraDAO implements IUnitSiraDAO
     public Unit getUnitByUnitParentAndGeom( Double lng, Double lat, int idUnit )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTED_VALUES + "INNER JOIN unittree_unit_sector AS unit_sector ON unit_sector.id_unit = unit.id_unit "
-                + "INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector " + "WHERE unit.id_parent = ? AND ST_Contains(sector.geom, ST_GeomFromText('POINT(" + lng + " "
-                + lat + SQL_GEOM_VALUE );
+                + "INNER JOIN unittree_sector AS sector ON sector.id_sector = unit_sector.id_sector "
+                + "WHERE unit.id_parent = ? AND ST_Contains(sector.geom, ST_GeomFromText('POINT(" + lng + " " + lat + SQL_GEOM_VALUE );
         daoUtil.setInt( 1, idUnit );
 
         return getSingleUnit( daoUtil );
