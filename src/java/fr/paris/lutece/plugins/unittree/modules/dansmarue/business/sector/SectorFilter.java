@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,8 +34,6 @@
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -50,16 +48,16 @@ public class SectorFilter implements Serializable
     private static final long serialVersionUID = 796728974399590486L;
 
     /** The str sector name. */
-    private String            _strSectorName;
+    private String _strSectorName;
 
     /** The str sector num. */
-    private String            _strSectorNum;
+    private String _strSectorNum;
 
     /** The list ids sector. */
-    private List<Integer>     _listIdsSector;
+    private List<Integer> _listIdsSector;
 
     /** The b exclude ids sector. */
-    private boolean           _bExcludeIdsSector;
+    private boolean _bExcludeIdsSector;
 
     /**
      * Constructors.
@@ -108,9 +106,7 @@ public class SectorFilter implements Serializable
      */
     public List<Integer> getListIdsSector( )
     {
-        List<Integer> idsSector = new ArrayList<>( );
-        Collections.copy( idsSector, _listIdsSector );
-        return idsSector;
+        return _listIdsSector;
     }
 
     /**
@@ -121,7 +117,7 @@ public class SectorFilter implements Serializable
      */
     public void setListIdsSector( List<Integer> listIdsSector )
     {
-        Collections.copy( _listIdsSector, listIdsSector );
+        _listIdsSector = listIdsSector;
     }
 
     /**

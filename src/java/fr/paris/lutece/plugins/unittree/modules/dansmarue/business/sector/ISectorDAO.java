@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,19 +38,19 @@ import java.util.List;
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
-
-
 /**
  * ISectorDAO.
  */
 public interface ISectorDAO
 {
-    
+
     /**
      * Load a sector.
      *
-     * @param nIdSector            the id sector
-     * @param plugin            the plugin
+     * @param nIdSector
+     *            the id sector
+     * @param plugin
+     *            the plugin
      * @return an instance of {@link Sector}
      */
     Sector load( int nIdSector, Plugin plugin );
@@ -58,7 +58,8 @@ public interface ISectorDAO
     /**
      * Load all sectors.
      *
-     * @param plugin            the plugin
+     * @param plugin
+     *            the plugin
      * @return a list of {@link Sector}
      */
     List<Sector> loadAll( Plugin plugin );
@@ -66,18 +67,24 @@ public interface ISectorDAO
     /**
      * Load sectors from a given id unit.
      *
-     * @param nIdUnit            the id unit
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param plugin
+     *            the plugin
      * @return a list of {@link Sector}
      */
     List<Sector> loadByIdUnit( int nIdUnit, Plugin plugin );
 
     /**
-     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's in the "select" list.
+     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
+     * in the "select" list.
      *
-     * @param nIdUnit            the id unit
-     * @param nChosenId            the chosen id to avoid
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param nChosenId
+     *            the chosen id to avoid
+     * @param plugin
+     *            the plugin
      * @return a list of sectors
      */
     List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId, Plugin plugin );
@@ -85,8 +92,10 @@ public interface ISectorDAO
     /**
      * Select all the sectors for a unit except the specific deve's unit.
      *
-     * @param nIdUnit            the id unit
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param plugin
+     *            the plugin
      * @return a list of sectors
      */
     List<Sector> loadByIdUnitWithoutSpecificDeveUnit( int nIdUnit, Plugin plugin );
@@ -94,8 +103,10 @@ public interface ISectorDAO
     /**
      * Load sectors by ids sector.
      *
-     * @param sFilter            the filter
-     * @param plugin            the plugin
+     * @param sFilter
+     *            the filter
+     * @param plugin
+     *            the plugin
      * @return a list of {@link Sector}
      */
     List<Sector> loadByFilter( SectorFilter sFilter, Plugin plugin );
@@ -103,7 +114,8 @@ public interface ISectorDAO
     /**
      * Load available sectors that are not associated to any unit.
      *
-     * @param plugin            the plugin
+     * @param plugin
+     *            the plugin
      * @return a list of {@link Sector}
      */
     List<Sector> loadAvailableSectors( Plugin plugin );
@@ -111,8 +123,10 @@ public interface ISectorDAO
     /**
      * Load units with no children that possesses the given id sector.
      *
-     * @param nIdSector            the id sector
-     * @param plugin            the plugin
+     * @param nIdSector
+     *            the id sector
+     * @param plugin
+     *            the plugin
      * @return a list of {@link Unit}
      */
     List<Unit> loadUnitsWithNoChildrenByIdSector( int nIdSector, Plugin plugin );
@@ -120,18 +134,24 @@ public interface ISectorDAO
     /**
      * Add a sector to an unit.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
+     * @param plugin
+     *            the plugin
      */
     void addSectorToUnit( int nIdUnit, int nIdSector, Plugin plugin );
 
     /**
      * Check if the given id unit has the given sector.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
+     * @param plugin
+     *            the plugin
      * @return true if the unit has the sector, false otherwise
      */
     boolean hasSector( int nIdUnit, int nIdSector, Plugin plugin );
@@ -139,8 +159,10 @@ public interface ISectorDAO
     /**
      * Check if the given id unit has sectors.
      *
-     * @param nIdUnit            the id unit
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param plugin
+     *            the plugin
      * @return true if the unit has sectors, false otherwise
      */
     boolean hasSectors( int nIdUnit, Plugin plugin );
@@ -148,8 +170,10 @@ public interface ISectorDAO
     /**
      * Check if the given id sector can be associated to an unit.
      *
-     * @param nIdSector            the id sector
-     * @param plugin            the plugin
+     * @param nIdSector
+     *            the id sector
+     * @param plugin
+     *            the plugin
      * @return true if it can be associated, false otherwise
      */
     boolean isAssociated( int nIdSector, Plugin plugin );
@@ -157,25 +181,32 @@ public interface ISectorDAO
     /**
      * Remove sectors from a given id unit.
      *
-     * @param nIdUnit            the id unit
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param plugin
+     *            the plugin
      */
     void removeSectorsFromUnit( int nIdUnit, Plugin plugin );
 
     /**
      * Remove sectors from a given id unit.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
-     * @param plugin            the plugin
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
+     * @param plugin
+     *            the plugin
      */
     void removeSectorFromUnit( int nIdUnit, int nIdSector, Plugin plugin );
 
     /**
      * Delete sector from a given id sector.
      *
-     * @param nIdSector            the id sector
-     * @param plugin            the plugin
+     * @param nIdSector
+     *            the id sector
+     * @param plugin
+     *            the plugin
      */
     void deleteSector( int nIdSector, Plugin plugin );
 
@@ -236,19 +267,26 @@ public interface ISectorDAO
     /**
      * Remove a list of sectors from a list of units.
      *
-     * @param listSector            The list of serctors to remove
-     * @param unit            The unit to remove the sectors of.
-     * @param plugin            The plugin
+     * @param listSector
+     *            The list of serctors to remove
+     * @param unit
+     *            The unit to remove the sectors of.
+     * @param plugin
+     *            The plugin
      */
     void removeListSectorFromUnit( List<Sector> listSector, Unit unit, Plugin plugin );
 
     /**
      * Finds sectors which are from the given directions, and within a radius of the location.
      *
-     * @param lng            Longitude of the location
-     * @param lat            Latitude of the location
-     * @param nRadius            Radius within the location
-     * @param nIdUnits            Id of the unit directions
+     * @param lng
+     *            Longitude of the location
+     * @param lat
+     *            Latitude of the location
+     * @param nRadius
+     *            Radius within the location
+     * @param nIdUnits
+     *            Id of the unit directions
      * @return List of sectors matching those args
      */
     List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer nRadius, List<Integer> nIdUnits );
@@ -256,7 +294,8 @@ public interface ISectorDAO
     /**
      * Finds a direction from a sector id.
      *
-     * @param nIdSector            the sector id linked to the direction unit
+     * @param nIdSector
+     *            the sector id linked to the direction unit
      * @return the id of the direction unit
      */
     int getDirectionUnitIdBySectorId( int nIdSector );

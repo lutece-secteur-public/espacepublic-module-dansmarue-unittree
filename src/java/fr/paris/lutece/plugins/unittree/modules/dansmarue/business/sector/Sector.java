@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,21 +35,19 @@ package fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-
-
 /**
  * Sector.
  */
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class Sector
 {
-    
+
     /** The n id sector. */
     private int _nIdSector;
-    
+
     /** The str name. */
     private String _strName;
-    
+
     /** The str number sector. */
     private String _strNumberSector;
 
@@ -58,7 +56,7 @@ public class Sector
      *
      * @return the id sector
      */
-    public int getIdSector(  )
+    public int getIdSector( )
     {
         return _nIdSector;
     }
@@ -66,7 +64,8 @@ public class Sector
     /**
      * Set the id sector.
      *
-     * @param nIdSector            the id sector
+     * @param nIdSector
+     *            the id sector
      */
     public void setIdSector( int nIdSector )
     {
@@ -78,7 +77,7 @@ public class Sector
      *
      * @return the name
      */
-    public String getName(  )
+    public String getName( )
     {
         return _strName;
     }
@@ -86,7 +85,8 @@ public class Sector
     /**
      * Set the name.
      *
-     * @param strName            the name
+     * @param strName
+     *            the name
      */
     public void setName( String strName )
     {
@@ -98,7 +98,7 @@ public class Sector
      *
      * @return the number sector
      */
-    public String getNumberSector(  )
+    public String getNumberSector( )
     {
         return _strNumberSector;
     }
@@ -106,7 +106,8 @@ public class Sector
     /**
      * Set the number sector.
      *
-     * @param strNumberSector            the number sector
+     * @param strNumberSector
+     *            the number sector
      */
     public void setNumberSector( String strNumberSector )
     {
@@ -118,7 +119,7 @@ public class Sector
      *
      * @return formatted string
      */
-    public String getFormatNameNumber(  )
+    public String getFormatNameNumber( )
     {
         return _strName + " - " + _strNumberSector;
     }
@@ -128,7 +129,7 @@ public class Sector
      *
      * @return formatted string
      */
-    public String getFormatNumberName(  )
+    public String getFormatNumberName( )
     {
         return _strNumberSector + " - " + _strName;
     }

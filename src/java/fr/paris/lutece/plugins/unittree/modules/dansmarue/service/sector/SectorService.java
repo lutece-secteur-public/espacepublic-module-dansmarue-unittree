@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -62,7 +62,7 @@ public class SectorService implements ISectorService
 
     /** The Constant PARAMETER_ID_SECTOR. */
     // PARAMETERS
-    private static final String PARAMETER_ID_SECTOR                = "idSector";
+    private static final String PARAMETER_ID_SECTOR = "idSector";
 
     /** The Constant PROPERTY_SECTOR_UNIT_LINK_MULTIPLE. */
     // PROPERTIES
@@ -70,7 +70,7 @@ public class SectorService implements ISectorService
 
     /** The unit service. */
     @Inject
-    private IUnitService        _unitService;
+    private IUnitService _unitService;
 
     // GET
 
@@ -284,7 +284,7 @@ public class SectorService implements ISectorService
     public void populate( Unit unit, HttpServletRequest request ) throws UnitErrorException
     {
         // Ids sector
-        String[] strIdsSectors = request.getParameterValues( PARAMETER_ID_SECTOR );
+        String [ ] strIdsSectors = request.getParameterValues( PARAMETER_ID_SECTOR );
 
         if ( ( strIdsSectors != null ) && ( strIdsSectors.length > 0 ) )
         {
@@ -524,7 +524,8 @@ public class SectorService implements ISectorService
     }
 
     /**
-     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's in the "select" list.
+     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
+     * in the "select" list.
      *
      * @param nIdUnit
      *            the id unit

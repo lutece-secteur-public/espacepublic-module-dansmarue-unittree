@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,21 +41,20 @@ import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.portal.service.plugin.PluginService;
 import fr.paris.lutece.portal.service.spring.SpringContextService;
 
-
 /**
  * SectorHome.
  */
 public final class SectorHome
 {
-    
+
     /** The Constant BEAN_SECTOR_DAO. */
     private static final String BEAN_SECTOR_DAO = "unittree-dansmarue.sectorDAO";
-    
+
     /** The plugin. */
-    private static Plugin       _plugin         = PluginService.getPlugin( UnitTreePlugin.PLUGIN_NAME );
-    
+    private static Plugin _plugin = PluginService.getPlugin( UnitTreePlugin.PLUGIN_NAME );
+
     /** The dao. */
-    private static ISectorDAO   _dao            = SpringContextService.getBean( BEAN_SECTOR_DAO );
+    private static ISectorDAO _dao = SpringContextService.getBean( BEAN_SECTOR_DAO );
 
     /**
      * Private constructor.
@@ -67,7 +66,8 @@ public final class SectorHome
     /**
      * Find a sector from its primary key.
      *
-     * @param nIdSector            the id sector
+     * @param nIdSector
+     *            the id sector
      * @return an instance of {@link Sector}
      */
     public static Sector findByPrimaryKey( int nIdSector )
@@ -88,7 +88,8 @@ public final class SectorHome
     /**
      * Find sectors from a given id unit.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      * @return a list of {@link Sector}
      */
     public static List<Sector> findByIdUnit( int nIdUnit )
@@ -99,7 +100,8 @@ public final class SectorHome
     /**
      * Find sectors from a given id unit.
      *
-     * @param sFilter            the filter
+     * @param sFilter
+     *            the filter
      * @return a list of {@link Sector}
      */
     public static List<Sector> findByFilter( SectorFilter sFilter )
@@ -120,7 +122,8 @@ public final class SectorHome
     /**
      * Load units with no children that possesses the given id sector.
      *
-     * @param nIdSector            the id sector
+     * @param nIdSector
+     *            the id sector
      * @return a list of {@link Unit}
      */
     public static List<Unit> findUnitsWithNoChildrenByIdSector( int nIdSector )
@@ -131,8 +134,10 @@ public final class SectorHome
     /**
      * Add a sector to an unit.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
      */
     public static void addSectorToUnit( int nIdUnit, int nIdSector )
     {
@@ -142,8 +147,10 @@ public final class SectorHome
     /**
      * Check if the unit has a sector.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
      * @return true if the unit has the sector, false otherwise
      */
     public static boolean hasSector( int nIdUnit, int nIdSector )
@@ -154,7 +161,8 @@ public final class SectorHome
     /**
      * Check if the unit has a sectors.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      * @return true if the unit has sectors, false otherwise
      */
     public static boolean hasSectors( int nIdUnit )
@@ -165,7 +173,8 @@ public final class SectorHome
     /**
      * Check if the given id sector can be associated to an unit.
      *
-     * @param nIdSector            the id sector
+     * @param nIdSector
+     *            the id sector
      * @return true if it can be associated, false otherwise
      */
     public static boolean isAssociated( int nIdSector )
@@ -176,7 +185,8 @@ public final class SectorHome
     /**
      * Remove the sectors from an unit.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      */
     public static void removeSectorsFromUnit( int nIdUnit )
     {
@@ -186,8 +196,10 @@ public final class SectorHome
     /**
      * Remove the sectors from an unit.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
      */
     public static void removeSectorFromUnit( int nIdUnit, int nIdSector )
     {
@@ -197,8 +209,10 @@ public final class SectorHome
     /**
      * Remove a list of sectors from a list of units.
      *
-     * @param listSector            The list of serctors to remove
-     * @param unit            The unit to remove the sectors of.
+     * @param listSector
+     *            The list of serctors to remove
+     * @param unit
+     *            The unit to remove the sectors of.
      */
     public static void removeListSectorFromUnit( List<Sector> listSector, Unit unit )
     {
@@ -211,7 +225,8 @@ public final class SectorHome
     /**
      * Delete the sector.
      *
-     * @param nIdSector            the idSector
+     * @param nIdSector
+     *            the idSector
      */
     public static void deleteSector( int nIdSector )
     {
@@ -235,10 +250,13 @@ public final class SectorHome
     }
 
     /**
-     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's in the "select" list.
+     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
+     * in the "select" list.
      *
-     * @param nIdUnit            the idUnit
-     * @param nChosenId            the chosenId
+     * @param nIdUnit
+     *            the idUnit
+     * @param nChosenId
+     *            the chosenId
      * @return a list of sectors
      */
     public static List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId )
@@ -249,7 +267,8 @@ public final class SectorHome
     /**
      * Select all the sectors for a unit except specific deve unit.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      * @return a list of sectors
      */
     public static List<Sector> loadByIdUnitWithoutSpecificDeveUnits( int nIdUnit )
@@ -260,10 +279,14 @@ public final class SectorHome
     /**
      * Finds sectors which are from the given directions, and within a radius of the location.
      *
-     * @param lng            Longitude of the location
-     * @param lat            Latitude of the location
-     * @param radius            Radius within the location
-     * @param idUnits            Id of the unit directions
+     * @param lng
+     *            Longitude of the location
+     * @param lat
+     *            Latitude of the location
+     * @param radius
+     *            Radius within the location
+     * @param idUnits
+     *            Id of the unit directions
      * @return List of sectors matching those args
      */
     public static List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer radius, List<Integer> idUnits )

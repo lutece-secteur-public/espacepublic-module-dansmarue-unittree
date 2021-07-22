@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.service.role;
 
-
 import java.util.Locale;
 
 // Start of user code for imports
@@ -43,8 +42,6 @@ import fr.paris.lutece.portal.service.rbac.ResourceType;
 import fr.paris.lutece.portal.service.rbac.ResourceTypeManager;
 import fr.paris.lutece.util.ReferenceList;
 
-
-
 // End of user code for imports
 
 /**
@@ -52,13 +49,13 @@ import fr.paris.lutece.util.ReferenceList;
  */
 public class SectorResourceIdService extends ResourceIdService
 {
-    
+
     /** The Constant KEY_ID_RESOURCE. */
     public static final String KEY_ID_RESOURCE = "UNIT_TYPE";
-    
+
     /** The Constant PERMISSION_DELETE_SECTOR. */
     public static final String PERMISSION_DELETE_SECTOR = "MODIFY_SECTOR";
-    
+
     /** The Constant PROPERTY_LABEL_RESOURCE_TYPE. */
     private static final String PROPERTY_LABEL_RESOURCE_TYPE = "module.unittree.dansmarue.unit.resourceType.label.sector.management";
 
@@ -68,7 +65,7 @@ public class SectorResourceIdService extends ResourceIdService
     /**
      * Constructor.
      */
-    public SectorResourceIdService(  )
+    public SectorResourceIdService( )
     {
         setPluginName( "unittree-dansmarue" );
     }
@@ -77,17 +74,17 @@ public class SectorResourceIdService extends ResourceIdService
      * Resource register.
      */
     @Override
-    public void register(  )
+    public void register( )
     {
-        ResourceType rt = new ResourceType(  );
-        rt.setResourceIdServiceClass( SectorResourceIdService.class.getName(  ) );
+        ResourceType rt = new ResourceType( );
+        rt.setResourceIdServiceClass( SectorResourceIdService.class.getName( ) );
         rt.setPluginName( "unittree-dansmarue" );
         rt.setResourceTypeKey( KEY_ID_RESOURCE );
         rt.setResourceTypeLabelKey( PROPERTY_LABEL_RESOURCE_TYPE );
 
         Permission p = null;
 
-        p = new Permission(  );
+        p = new Permission( );
         p.setPermissionKey( PERMISSION_DELETE_SECTOR );
         p.setPermissionTitleKey( "module.unittree.dansmarue.unit.permission.label.sector.management.delete.sector" );
         rt.registerPermission( p );
@@ -98,7 +95,8 @@ public class SectorResourceIdService extends ResourceIdService
     /**
      * Gets the resource id list.
      *
-     * @param locale            the current local
+     * @param locale
+     *            the current local
      * @return null
      */
     @Override
@@ -110,8 +108,10 @@ public class SectorResourceIdService extends ResourceIdService
     /**
      * Gets the title.
      *
-     * @param strId           the  resource Id
-     * @param locale           the current local
+     * @param strId
+     *            the resource Id
+     * @param locale
+     *            the current local
      * @return null
      */
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,18 +43,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-
-
 /**
  * ISectorService.
  */
 public interface ISectorService extends IUnitAttributeService
 {
-    
+
     /**
      * Find a sector from its primary key.
      *
-     * @param nIdSector            the id sector
+     * @param nIdSector
+     *            the id sector
      * @return an instance of {@link Sector}
      */
     Sector findByPrimaryKey( int nIdSector );
@@ -62,16 +61,20 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * find a list of sectors from a given id unit.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      * @return a list of {@link Sector}
      */
     List<Sector> findByIdUnit( int nIdUnit );
 
     /**
-     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's in the "select" list.
+     * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
+     * in the "select" list.
      *
-     * @param nIdUnit            the id unit
-     * @param nChosenId            the chosen id to avoid
+     * @param nIdUnit
+     *            the id unit
+     * @param nChosenId
+     *            the chosen id to avoid
      * @return a list of sectors
      */
     List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId );
@@ -81,12 +84,13 @@ public interface ISectorService extends IUnitAttributeService
      *
      * @return a list of {@link Sector}
      */
-    List<Sector> findAll(  );
+    List<Sector> findAll( );
 
     /**
      * Find sectors by ids sector.
      *
-     * @param sFilter            the filter
+     * @param sFilter
+     *            the filter
      * @return a list of {@link Sector}
      */
     List<Sector> findByFilter( SectorFilter sFilter );
@@ -94,8 +98,10 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Find the available sectors that are not associated to any unit.
      *
-     * @param sFilter            the filter
-     * @param nIdUnit            the id unit
+     * @param sFilter
+     *            the filter
+     * @param nIdUnit
+     *            the id unit
      * @return a list of {@link Sector}
      */
     List<Sector> findAvailableSectors( SectorFilter sFilter, int nIdUnit );
@@ -103,7 +109,8 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Load units with no children that possesses the given id sector.
      *
-     * @param nIdSector            the id sector
+     * @param nIdSector
+     *            the id sector
      * @return a list of {@link Unit}
      */
     List<Unit> findUnitsWithNoChildrenByIdSector( int nIdSector );
@@ -133,7 +140,8 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Check if the unit has sectors.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      * @return true if the unit has sector, false otherwise
      */
     boolean hasSectors( int nIdUnit );
@@ -141,8 +149,10 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Check if the unit has the sector.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
      * @return true if the unit has the sector, false otherwise
      */
     boolean hasSector( int nIdUnit, int nIdSector );
@@ -150,8 +160,10 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Check if the we can add the given sector-unit link.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
      * @return true if it can be associated, false otherwise
      */
     boolean canAddSector( int nIdUnit, int nIdSector );
@@ -159,14 +171,16 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Add the sectors to the unit and to its parent.
      *
-     * @param unit            the unit
+     * @param unit
+     *            the unit
      */
     void addSectorsToUnit( Unit unit );
 
     /**
      * Build the list of associated sectors from a given id unit.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      * @return a list of {@link Sector}
      */
     List<Sector> buildListAssociatedSectors( int nIdUnit );
@@ -174,8 +188,10 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Build the list of available sectors from a given filter and a given id unit.
      *
-     * @param sFilter            the filter
-     * @param nIdUnit            the id unit
+     * @param sFilter
+     *            the filter
+     * @param nIdUnit
+     *            the id unit
      * @return a list of {@link Sector}
      */
     List<Sector> buildListAvailableSectors( SectorFilter sFilter, int nIdUnit );
@@ -209,8 +225,10 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Add sectors to the unit.
      *
-     * @param unit            the unit
-     * @param listIdsSector            the list of ids sector
+     * @param unit
+     *            the unit
+     * @param listIdsSector
+     *            the list of ids sector
      */
     @Transactional( "unittree-dansmarue.transactionManager" )
     void addSectorsToUnit( Unit unit, List<Integer> listIdsSector );
@@ -218,7 +236,8 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Remove the sectors from an unit.
      *
-     * @param nIdUnit            the id unit
+     * @param nIdUnit
+     *            the id unit
      */
     @Transactional( "unittree-dansmarue.transactionManager" )
     void removeSectorsFromUnit( int nIdUnit );
@@ -226,8 +245,10 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Remove the sectors from an unit.
      *
-     * @param nIdUnit            the id unit
-     * @param nIdSector            the id sector
+     * @param nIdUnit
+     *            the id unit
+     * @param nIdSector
+     *            the id sector
      */
     @Transactional( "unittree-dansmarue.transactionManager" )
     void removeSectorFromUnit( int nIdUnit, int nIdSector );
@@ -235,7 +256,8 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Delete the sector.
      *
-     * @param nIdSector            the id sector
+     * @param nIdSector
+     *            the id sector
      */
     @Transactional( "unittree-dansmarue.transactionManager" )
     void deleteSector( int nIdSector );
@@ -243,7 +265,8 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Select all the sectors for a unit except specific deve unit.
      *
-     * @param idUnit            the id unit
+     * @param idUnit
+     *            the id unit
      * @return a list of sectors
      */
     List<Sector> loadByIdUnitWithoutSpecificDeveUnits( int idUnit );
@@ -251,10 +274,14 @@ public interface ISectorService extends IUnitAttributeService
     /**
      * Finds sectors which are from the given directions, and within a radius of the location.
      *
-     * @param lng            Longitude of the location
-     * @param lat            Latitude of the location
-     * @param radius            Radius within the location
-     * @param idUnits            Id of the unit directions
+     * @param lng
+     *            Longitude of the location
+     * @param lat
+     *            Latitude of the location
+     * @param radius
+     *            Radius within the location
+     * @param idUnits
+     *            Id of the unit directions
      * @return List of sectors matching those args
      */
     List<Sector> findSectorsByDirectionsAndGeom( Double lng, Double lat, Integer radius, List<Integer> idUnits );

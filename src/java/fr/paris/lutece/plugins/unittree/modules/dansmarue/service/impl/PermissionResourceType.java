@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,17 +33,15 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.service.impl;
 
-
-
 /**
  * PermissionResourceType.
  */
 public class PermissionResourceType
 {
-    
+
     /** The str permission. */
     private String _strPermission;
-    
+
     /** The str resource type. */
     private String _strResourceType;
 
@@ -51,13 +49,13 @@ public class PermissionResourceType
      * Creates a new PermissionTypeRessource.java object.
      *
      * @param strResourceType
-     *         the resourceType
+     *            the resourceType
      * @param strPermission
-     *         the permission
+     *            the permission
      */
     public PermissionResourceType( String strResourceType, String strPermission )
     {
-        super(  );
+        super( );
         _strResourceType = strResourceType;
         _strPermission = strPermission;
     }
@@ -65,7 +63,8 @@ public class PermissionResourceType
     /**
      * Sets the permission.
      *
-     * @param strPermission            the permission to set
+     * @param strPermission
+     *            the permission to set
      */
     public void setPermission( String strPermission )
     {
@@ -77,7 +76,7 @@ public class PermissionResourceType
      *
      * @return the permission
      */
-    public String getPermission(  )
+    public String getPermission( )
     {
         return _strPermission;
     }
@@ -85,7 +84,8 @@ public class PermissionResourceType
     /**
      * Sets the ressource type.
      *
-     * @param strResourceType            the resourceType to set
+     * @param strResourceType
+     *            the resourceType to set
      */
     public void setRessourceType( String strResourceType )
     {
@@ -97,7 +97,7 @@ public class PermissionResourceType
      *
      * @return the ressourceType
      */
-    public String getRessourceType(  )
+    public String getRessourceType( )
     {
         return _strResourceType;
     }

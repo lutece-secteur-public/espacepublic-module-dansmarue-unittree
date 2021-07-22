@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,20 +37,21 @@ import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 
 import java.util.List;
 
-
-
 /**
  * The Interface IUnitSiraService.
  */
 public interface IUnitSiraService
 {
-    
+
     /**
      * Return the unit by location and signalement type.
      *
-     * @param lng            longitude of the location
-     * @param lat            latitude of the location
-     * @param typeSignalementId            the signalement type id
+     * @param lng
+     *            longitude of the location
+     * @param lat
+     *            latitude of the location
+     * @param typeSignalementId
+     *            the signalement type id
      * @return Unit by location and signalement type
      */
     Unit findUnitByGeomAndTypeSignalement( Double lng, Double lat, Integer typeSignalementId );
@@ -58,9 +59,12 @@ public interface IUnitSiraService
     /**
      * Return the unit by location and equipement type.
      *
-     * @param lng            longitude of the location
-     * @param lat            latitude of the location
-     * @param typeEquipementId            the equipement type id
+     * @param lng
+     *            longitude of the location
+     * @param lat
+     *            latitude of the location
+     * @param typeEquipementId
+     *            the equipement type id
      * @return Unit by location and equipement type
      */
     Unit findUnitByGeomAndTypeEquipement( Double lng, Double lat, Integer typeEquipementId );
@@ -68,8 +72,10 @@ public interface IUnitSiraService
     /**
      * Return a list of Unit by location.
      *
-     * @param lng            longitude of the location
-     * @param lat            latitude of the location
+     * @param lng
+     *            longitude of the location
+     * @param lat
+     *            latitude of the location
      * @return Unit list by location
      */
     List<Unit> getUnitsLeafsByGeom( Double lng, Double lat );
@@ -77,9 +83,12 @@ public interface IUnitSiraService
     /**
      * Search for all units within a radius from a given location.
      *
-     * @param lng            longitude of the location
-     * @param lat            latitude of the location
-     * @param radius            radius to search from
+     * @param lng
+     *            longitude of the location
+     * @param lat
+     *            latitude of the location
+     * @param radius
+     *            radius to search from
      * @return Units within a given radius from a location
      */
     List<Unit> findUnitsByGeom( Double lng, Double lat, Integer radius );

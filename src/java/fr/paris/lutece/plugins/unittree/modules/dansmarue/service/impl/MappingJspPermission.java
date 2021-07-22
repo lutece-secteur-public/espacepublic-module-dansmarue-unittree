@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,10 +55,13 @@ public class MappingJspPermission
     {
         MAPPING_JSP_PERMISSIONS = new HashMap<>( );
 
-        MAPPING_JSP_PERMISSIONS.put( "ModifySector.jsp", new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
+        MAPPING_JSP_PERMISSIONS.put( "ModifySector.jsp",
+                new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
 
-        MAPPING_JSP_PERMISSIONS.put( "DoDeleteSectors.jsp", new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
+        MAPPING_JSP_PERMISSIONS.put( "DoDeleteSectors.jsp",
+                new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
 
-        MAPPING_JSP_PERMISSIONS.put( "DeleteSectors.jsp", new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
+        MAPPING_JSP_PERMISSIONS.put( "DeleteSectors.jsp",
+                new PermissionResourceType( SectorResourceIdService.KEY_ID_RESOURCE, SectorResourceIdService.PERMISSION_DELETE_SECTOR ) );
     }
 }

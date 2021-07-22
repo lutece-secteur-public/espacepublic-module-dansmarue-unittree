@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020, City of Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,30 +58,30 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
 {
 
     /** The Constant NAME. */
-    private static final String NAME                         = "Sector unit attribute";
+    private static final String NAME = "Sector unit attribute";
 
     /** The Constant PARAMETER_SEARCH_SECTORS. */
     // PARAMETERS
-    private static final String PARAMETER_SEARCH_SECTORS     = "searchSectors";
+    private static final String PARAMETER_SEARCH_SECTORS = "searchSectors";
 
     /** The Constant PARAMETER_ID_UNIT. */
-    private static final String PARAMETER_ID_UNIT            = "idUnit";
+    private static final String PARAMETER_ID_UNIT = "idUnit";
 
     /** The Constant MARK_LIST_AVAILABLE_SECTORS. */
     // MARKS
-    private static final String MARK_LIST_AVAILABLE_SECTORS  = "listAvailableSectors";
+    private static final String MARK_LIST_AVAILABLE_SECTORS = "listAvailableSectors";
 
     /** The Constant MARK_LIST_ASSOCIATED_SECTORS. */
     private static final String MARK_LIST_ASSOCIATED_SECTORS = "listAssociatedSectors";
 
     /** The Constant MARK_SECTOR_FILTER. */
-    private static final String MARK_SECTOR_FILTER           = "sectorFilter";
+    private static final String MARK_SECTOR_FILTER = "sectorFilter";
 
     /** The Constant MARK_HAS_SUB_UNITS. */
-    private static final String MARK_HAS_SUB_UNITS           = "hasSubUnits";
+    private static final String MARK_HAS_SUB_UNITS = "hasSubUnits";
 
     /** The Constant MARK_MAP_IDS_SECTOR_UNITS. */
-    private static final String MARK_MAP_IDS_SECTOR_UNITS    = "mapIdsSectorUnits";
+    private static final String MARK_MAP_IDS_SECTOR_UNITS = "mapIdsSectorUnits";
 
     /** The Constant TEMPLATE_ATTRIBUTE_COMPONENT. */
     // TEMPLATES
@@ -89,11 +89,11 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
 
     /** The unit service. */
     @Inject
-    private IUnitService        _unitService;
+    private IUnitService _unitService;
 
     /** The sector service. */
     @Inject
-    private ISectorService      _sectorService;
+    private ISectorService _sectorService;
 
     /**
      * {@inheritDoc}
@@ -187,7 +187,7 @@ public class SectorUnitAttributeComponent implements IUnitAttributeComponent
             {
                 BeanUtils.populate( sFilter, request.getParameterMap( ) );
             }
-            catch ( IllegalAccessException | InvocationTargetException e )
+            catch( IllegalAccessException | InvocationTargetException e )
             {
                 AppLogService.error( e.getMessage( ), e );
             }
