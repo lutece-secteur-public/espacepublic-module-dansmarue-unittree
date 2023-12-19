@@ -33,14 +33,21 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Sector.
  */
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class Sector
+public class Sector implements Serializable
 {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7198297995874012988L;
 
     /** The n id sector. */
     private int _nIdSector;

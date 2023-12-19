@@ -37,7 +37,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -118,7 +118,7 @@ public class SectorDAO implements ISectorDAO
     private static final String SQL_ORDER_BY_NAME_ASC = " ORDER BY name ASC ";
 
     /** The Constant SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID. */
-    private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = ? ) AND unit.id_unit = ? ORDER BY s.id_sector ";
+    private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = ? ) AND unit.id_unit IN ({0}) ORDER BY s.id_sector ";
 
     /** The Constant SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_SPECIFIC_DEVE_UNIT. */
     private static final String SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_SPECIFIC_DEVE_UNIT = "SELECT s.id_sector, s.name, s.number_sector, unit.label FROM unittree_sector s INNER JOIN unittree_unit_sector u ON s.id_sector = u.id_sector  INNER JOIN unittree_unit unit ON u.id_unit = unit.id_unit WHERE s.id_sector NOT IN ( SELECT sector.id_sector FROM unittree_sector sector INNER JOIN unittree_unit_sector unit_sector ON sector.id_sector = unit_sector.id_sector WHERE unit_sector.id_unit = 260 ) AND unit.id_unit = ? ORDER BY s.id_sector ";
@@ -239,8 +239,8 @@ public class SectorDAO implements ISectorDAO
      * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
      * in the "select" list.
      *
-     * @param nIdUnit
-     *            the n id unit
+     * @param idUnits
+     *            the id units
      * @param nChosenId
      *            the n chosen id
      * @param plugin
@@ -248,12 +248,30 @@ public class SectorDAO implements ISectorDAO
      * @return the list
      */
     @Override
-    public List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId, Plugin plugin )
+    public List<Sector> loadByIdUnitWithoutChosenId( List<Integer> idUnits , int nChosenId, Plugin plugin )
     {
         List<Sector> listSectors = new ArrayList<>( );
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID );
-        daoUtil.setInt( 1, nChosenId );
-        daoUtil.setInt( 2, nIdUnit );
+
+        int listeLength = idUnits.size( );
+        Character [ ] array = new Character [ listeLength];
+
+        for ( int i = 0; i < listeLength; i++ )
+        {
+            array [i] = '?';
+        }
+
+        String unionQuery = StringUtils.join( array, COMMA );
+
+        String sqlQuery = MessageFormat.format( SQL_QUERY_SELECT_BY_ID_UNIT_WITHOUT_CHOSEN_ID, unionQuery );
+        DAOUtil daoUtil = new DAOUtil( sqlQuery );
+        int index = 1;
+        daoUtil.setInt( index++ , nChosenId );
+
+        for ( Integer idUnit : idUnits )
+        {
+            daoUtil.setInt( index++, idUnit );
+        }
+
         daoUtil.executeQuery( );
 
         while ( daoUtil.next( ) )
@@ -605,7 +623,8 @@ public class SectorDAO implements ISectorDAO
     {
         StringBuilder sbSql = new StringBuilder( SQL_QUERY_DELETE_LIST_SECTORS_FROM_LIST_UNITS );
 
-        for ( int nIndexList = 0; nIndexList < ( listSector.size( ) - 1 ); nIndexList++ )
+        int listSectorSize = listSector.size( ) - 1;
+        for ( int nIndexList = 0; nIndexList < listSectorSize; nIndexList++ )
         {
             sbSql.append( QUESTION_MARK );
             sbSql.append( COMMA );
@@ -680,7 +699,8 @@ public class SectorDAO implements ISectorDAO
 
             sbSQL.append( SQL_IN ).append( OPEN_BRACKET );
 
-            for ( int nIndexList = 0; nIndexList < ( sFilter.getListIdsSector( ).size( ) - 1 ); nIndexList++ )
+            int listIdsSectorSize = sFilter.getListIdsSector( ).size( ) - 1;
+            for ( int nIndexList = 0; nIndexList < listIdsSectorSize; nIndexList++ )
             {
                 sbSQL.append( QUESTION_MARK );
                 sbSQL.append( COMMA );

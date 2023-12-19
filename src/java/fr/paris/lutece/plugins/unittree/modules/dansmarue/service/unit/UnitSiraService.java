@@ -35,7 +35,6 @@ package fr.paris.lutece.plugins.unittree.modules.dansmarue.service.unit;
 
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.plugins.unittree.modules.dansmarue.business.unit.IUnitSiraDAO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -83,6 +82,14 @@ public class UnitSiraService implements IUnitSiraService
     @Override
     public Unit findUnitByGeomAndTypeEquipement( Double lng, Double lat, Integer typeEquipementId )
     {
-        return _dao.findUnitByGeomAndTypeEquipement( lng, lat, (long) typeEquipementId );
+        return _dao.findUnitByGeomAndTypeEquipement( lng, lat, ( long ) typeEquipementId );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<Unit> findBySectorId( int nIdSector )
+    {
+        return _dao.findBySectorId( nIdSector );
     }
 }

@@ -33,11 +33,11 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.business.unit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.util.sql.DAOUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * UnitSiraDAO.
@@ -52,9 +52,14 @@ public class UnitSiraDAO implements IUnitSiraDAO
     private static final String SQL_QUERY_SELECTED_VALUES = "SELECT unit.id_unit, unit.id_parent, unit.label, unit.description  FROM unittree_unit AS unit ";
 
     /** The Constant SQL_QUERY_SELECT_UNIT_BY_GEOM. */
-    private static final String SQL_QUERY_SELECT_UNIT_BY_GEOM = "SELECT DISTINCT uu.id_unit, uu.id_parent, uu.label, uu.description FROM unittree_unit uu"
-            + " INNER JOIN unittree_unit_sector uus ON uus.id_unit = uu.id_unit" + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector"
-            + " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true" + " AND uu.id_unit != 0";
+    private static final String SQL_QUERY_SELECT_UNIT_BY_GEOM =
+            "SELECT DISTINCT uu.id_unit, uu.id_parent, uu.label, uu.description FROM unittree_unit uu" + " INNER JOIN unittree_unit_sector uus ON uus.id_unit = uu.id_unit"
+                    + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector" + " WHERE ST_DWithin(ST_Transform(geom,3857),ST_Transform(ST_SetSRID(ST_MakePoint(?,?),4326),3857),?)=true"
+                    + " AND uu.id_unit != 0";
+    private static final String SQL_QUERY_SELECT_BY_SECTOR    =
+            " SELECT uu.id_unit, uu.id_parent, uu.label, uu.description " + " FROM unittree_unit_sector uus INNER JOIN unittree_unit uu ON uus.id_unit = uu.id_unit"
+                    + " INNER JOIN unittree_sector us ON us.id_sector = uus.id_sector WHERE us.id_sector = ? ";
+    private static final String SQL_ORDER_BY_LABEL_ASC        = " ORDER BY label ASC ";
 
     /**
      * Find unit by geom and type signalement.
@@ -253,6 +258,33 @@ public class UnitSiraDAO implements IUnitSiraDAO
         }
 
         daoUtil.close( );
+
+        return listUnits;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Unit> findBySectorId( int nIdSector )
+    {
+        List<Unit> listUnits = new ArrayList<Unit>( );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_SECTOR + SQL_ORDER_BY_LABEL_ASC );
+        daoUtil.setInt( 1, nIdSector );
+        daoUtil.executeQuery( );
+
+        while ( daoUtil.next( ) )
+        {
+            int nIndex = 1;
+            Unit unit = new Unit( );
+            unit.setIdUnit( daoUtil.getInt( nIndex++ ) );
+            unit.setIdParent( daoUtil.getInt( nIndex++ ) );
+            unit.setLabel( daoUtil.getString( nIndex++ ) );
+            unit.setDescription( daoUtil.getString( nIndex++ ) );
+            listUnits.add( unit );
+        }
+
+        daoUtil.free( );
 
         return listUnits;
     }

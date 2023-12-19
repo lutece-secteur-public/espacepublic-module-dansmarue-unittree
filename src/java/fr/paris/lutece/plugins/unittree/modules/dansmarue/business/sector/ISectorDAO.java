@@ -87,7 +87,7 @@ public interface ISectorDAO
      *            the plugin
      * @return a list of sectors
      */
-    List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId, Plugin plugin );
+    List<Sector> loadByIdUnitWithoutChosenId( List<Integer> idUnits, int nChosenId, Plugin plugin );
 
     /**
      * Select all the sectors for a unit except the specific deve's unit.

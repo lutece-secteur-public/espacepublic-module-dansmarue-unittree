@@ -41,7 +41,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.paris.lutece.plugins.unittree.business.unit.IUnitAttribute;
@@ -527,16 +527,16 @@ public class SectorService implements ISectorService
      * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
      * in the "select" list.
      *
-     * @param nIdUnit
-     *            the id unit
+     * @param idUnits
+     *            Id of the unit directions
      * @param nChosenId
      *            the chosen id to avoid
      * @return a list of sectors
      */
     @Override
-    public List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId )
+    public List<Sector> loadByIdUnitWithoutChosenId( List<Integer> idUnits, int nChosenId )
     {
-        return SectorHome.loadByIdUnitWithoutChosenId( nIdUnit, nChosenId );
+        return SectorHome.loadByIdUnitWithoutChosenId( idUnits, nChosenId );
     }
 
     /**
@@ -563,8 +563,9 @@ public class SectorService implements ISectorService
             return;
         }
 
+        int newUnitParentId = newUnitParent.getIdUnit( );
         // We remove sectors of sub units from old parents
-        while ( ( parent.getIdUnit( ) != newUnitParent.getIdUnit( ) ) && !_unitService.isParent( parent, newUnitParent ) )
+        while ( ( parent.getIdUnit( ) != newUnitParentId ) && !_unitService.isParent( parent, newUnitParent ) )
         {
             SectorHome.removeListSectorFromUnit( listSector, parent );
             parent = _unitService.getUnit( parent.getIdParent( ), false );
@@ -574,8 +575,8 @@ public class SectorService implements ISectorService
 
         // We add sectors of sub units to new parents
         Unit newParent = newUnitParent;
-
-        while ( newParent.getIdUnit( ) != parent.getIdUnit( ) )
+        int parentId = parent.getIdUnit( );
+        while ( newParent.getIdUnit( ) != parentId )
         {
             for ( Sector sector : listSector )
             {

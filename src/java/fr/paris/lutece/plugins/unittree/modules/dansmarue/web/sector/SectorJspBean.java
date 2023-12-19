@@ -38,13 +38,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import fr.paris.lutece.plugins.unittree.business.unit.Unit;
 import fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector.SectorFilter;
 import fr.paris.lutece.plugins.unittree.modules.dansmarue.service.role.SectorResourceIdService;
 import fr.paris.lutece.plugins.unittree.modules.dansmarue.service.sector.ISectorService;
 import fr.paris.lutece.plugins.unittree.service.UnitErrorException;
+import fr.paris.lutece.plugins.unittree.service.rbac.UnittreeRBACRecursiveType;
 import fr.paris.lutece.plugins.unittree.service.unit.IUnitService;
 import fr.paris.lutece.plugins.unittree.service.unit.UnitResourceIdService;
 import fr.paris.lutece.portal.service.message.AdminMessage;
@@ -144,7 +145,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         }
 
         // Check permissions
-        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser( ) ) )
+        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser( ), UnittreeRBACRecursiveType.PARENT_RECURSIVE ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.USER_ACCESS_DENIED, AdminMessage.TYPE_STOP );
         }
@@ -193,7 +194,7 @@ public class SectorJspBean extends PluginAdminPageJspBean
         }
 
         // Check permissions
-        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser( ) ) )
+        if ( !_unitService.isAuthorized( unit, UnitResourceIdService.PERMISSION_MODIFY, getUser( ), UnittreeRBACRecursiveType.PARENT_RECURSIVE ) )
         {
             return AdminMessageService.getMessageUrl( request, Messages.USER_ACCESS_DENIED, AdminMessage.TYPE_STOP );
         }

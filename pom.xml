@@ -4,19 +4,19 @@
   <parent>
     <groupId>fr.paris.lutece.tools</groupId>
     <artifactId>lutece-global-pom</artifactId>
-    <version>5.1.2</version>
+    <version>6.0.0</version>
   </parent>
   <groupId>fr.paris.lutece.plugins</groupId>
   <artifactId>module-unittree-signalement</artifactId>
-  <version>6.5.2-SNAPSHOT</version>
+  <version>7.1.0</version>
   <packaging>lutece-plugin</packaging>
   <name>Lutece Unit Tree module for Signalement</name>
-  <url>https://dev.lutece.paris.fr/gitlab/tmma/r59/module-unittree-signalement</url>
+  <url>https://github.com/lutece-secteur-public/espacepublic-module-dansmarue-unittree</url>
   <scm>
-    <connection>scm:git:https://dev.lutece.paris.fr/gitlab/tmma/r59/module-unittree-signalement.git</connection>
-    <developerConnection>scm:git:https://dev.lutece.paris.fr/gitlab/tmma/r59/module-unittree-signalement.git</developerConnection>
-    <url>https://dev.lutece.paris.fr/gitlab/tmma/r59/module-unittree-signalement</url>
-    <tag>HEAD</tag>
+    <connection>scm:git:https://github.com/lutece-secteur-public/espacepublic-module-dansmarue-unittree.git</connection>
+    <developerConnection>scm:git:https://github.com/lutece-secteur-public/espacepublic-module-dansmarue-unittree.git</developerConnection>
+    <url>https://github.com/lutece-secteur-public/espacepublic-module-dansmarue-unittree</url>
+    <tag>module-unittree-signalement-7.1.0</tag>
   </scm>
   <properties>
     <sonar.language>java</sonar.language>
@@ -31,12 +31,12 @@
       <groupId>fr.paris.lutece</groupId>
       <artifactId>lutece-core</artifactId>
       <type>lutece-core</type>
-      <version>6.1.0</version>
+      <version>7.0.6</version>
     </dependency>
     <dependency>
       <groupId>fr.paris.lutece.plugins</groupId>
       <artifactId>plugin-unittree</artifactId>
-      <version>2.1.2</version>
+      <version>3.1.0</version>
     </dependency>
   </dependencies>
   
