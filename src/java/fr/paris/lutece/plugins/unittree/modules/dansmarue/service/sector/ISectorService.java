@@ -71,13 +71,13 @@ public interface ISectorService extends IUnitAttributeService
      * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
      * in the "select" list.
      *
-     * @param nIdUnit
-     *            the id unit
+     * @param idUnits
+     *            Id of the unit directions
      * @param nChosenId
      *            the chosen id to avoid
      * @return a list of sectors
      */
-    List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId );
+    List<Sector> loadByIdUnitWithoutChosenId( List<Integer> idUnits, int nChosenId );
 
     /**
      * Find all sectors.

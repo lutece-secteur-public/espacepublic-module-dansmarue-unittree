@@ -33,10 +33,10 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
 
 /**
  * SectorFilter.

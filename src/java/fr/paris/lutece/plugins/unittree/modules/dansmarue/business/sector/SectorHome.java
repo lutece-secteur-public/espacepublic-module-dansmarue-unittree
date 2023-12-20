@@ -253,15 +253,15 @@ public final class SectorHome
      * Select all the sectors for a unit except the ones linked to a given id example : for the sectors in manage_signalement ,we don't want the garden sector's
      * in the "select" list.
      *
-     * @param nIdUnit
-     *            the idUnit
+     * @param idUnits
+     *            Id of the unit directions
      * @param nChosenId
      *            the chosenId
      * @return a list of sectors
      */
-    public static List<Sector> loadByIdUnitWithoutChosenId( int nIdUnit, int nChosenId )
+    public static List<Sector> loadByIdUnitWithoutChosenId( List<Integer> idUnits, int nChosenId )
     {
-        return _dao.loadByIdUnitWithoutChosenId( nIdUnit, nChosenId, _plugin );
+        return _dao.loadByIdUnitWithoutChosenId( idUnits, nChosenId, _plugin );
     }
 
     /**

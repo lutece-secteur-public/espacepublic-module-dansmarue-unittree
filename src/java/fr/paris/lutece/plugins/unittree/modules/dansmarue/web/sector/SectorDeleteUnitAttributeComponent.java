@@ -33,20 +33,18 @@
  */
 package fr.paris.lutece.plugins.unittree.modules.dansmarue.web.sector;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
-
 import fr.paris.lutece.plugins.unittree.modules.dansmarue.business.sector.SectorFilter;
 import fr.paris.lutece.plugins.unittree.modules.dansmarue.service.sector.ISectorService;
 import fr.paris.lutece.plugins.unittree.web.unit.IUnitAttributeComponent;
 import fr.paris.lutece.portal.business.user.AdminUser;
 import fr.paris.lutece.portal.service.util.AppLogService;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 /**
  * SectorUnitAttributeComponent.

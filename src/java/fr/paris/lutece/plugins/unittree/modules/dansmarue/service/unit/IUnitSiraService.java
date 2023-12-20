@@ -92,4 +92,11 @@ public interface IUnitSiraService
      * @return Units within a given radius from a location
      */
     List<Unit> findUnitsByGeom( Double lng, Double lat, Integer radius );
+
+    /**
+     * Find by sector id
+     * @param nIdSector id sector
+     * @return list of Unit found
+     */
+    List<Unit> findBySectorId( int nIdSector );
 }

@@ -104,4 +104,12 @@ public interface IUnitSiraDAO
      * @return the unit
      */
     Unit findUnitByGeomAndTypeEquipement( Double lng, Double lat, Long typeSEquipementId );
+
+    /**
+     * Find by sector id list.
+     *
+     * @param nIdSector the n id sector
+     * @return the list
+     */
+    List<Unit> findBySectorId( int nIdSector );
 }
